@@ -5,12 +5,14 @@
 
 class BigNumber() {
 	
+	ArrayList<boolean> number = new ArrayList<boolean>;
 	
+	void setNumber(ArrayList<boolean> newnumber) {
+		number = newnumber;
+	}
 	
-	
-	
-	string toString(int b) {
-		
+	ArrayList<boolean> getnumber() {
+		return number;
 	}
 	
 }
