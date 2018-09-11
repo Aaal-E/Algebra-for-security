@@ -48,7 +48,7 @@ class Formatter {
 	
 	//print a number in a given base
 	void println(ArrayList<Boolean> number, int base){
-		println(toString(number, base);
+		println(toString(number, base));
 	}
 	
 	//print a number with added prefix

@@ -2,17 +2,19 @@
 	stores big numbers as a boolean arraylist
 	maybe add a method to convert to string (in base b)
 */
+import java.util.*;
 
-class BigNumber() {
+class BigNumber {
 	
-	ArrayList<boolean> number = new ArrayList<boolean>;
+	ArrayList<Boolean> number = new ArrayList<Boolean>();
 	
-	void setNumber(ArrayList<boolean> newnumber) {
+	void setNumber(ArrayList<Boolean> newnumber) {
 		number = newnumber;
 	}
 	
-	ArrayList<boolean> getnumber() {
+	ArrayList<Boolean> getNumber() {
 		return number;
 	}
+	
 	
 }
