@@ -4,9 +4,9 @@
 */
 import java.util.*;
 
-class BigNumber() {
+class BigNumber {
 	
-	ArrayList<Boolean> number = new ArrayList<Boolean>;
+	ArrayList<Boolean> number = new ArrayList<Boolean>();
 	
 	void setNumber(ArrayList<Boolean> newnumber) {
 		number = newnumber;
