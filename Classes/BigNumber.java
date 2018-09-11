@@ -11,8 +11,9 @@ class BigNumber() {
 		number = newnumber;
 	}
 	
-	ArrayList<boolean> getnumber() {
+	ArrayList<boolean> getNumber() {
 		return number;
 	}
+	
 	
 }
