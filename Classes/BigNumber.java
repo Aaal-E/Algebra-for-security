@@ -6,13 +6,13 @@ import java.util.*;
 
 class BigNumber {
 	
-	ArrayList<Boolean> number = new ArrayList<Boolean>();
+	ArrayList<Integer> number = new ArrayList<Integer>();
 	
-	void setNumber(ArrayList<Boolean> newnumber) {
+	void setNumber(ArrayList<Integer> newnumber) {
 		number = newnumber;
 	}
 	
-	ArrayList<Boolean> getNumber() {
+	ArrayList<Integer> getNumber() {
 		return number;
 	}
 	
