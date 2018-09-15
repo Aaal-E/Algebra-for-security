@@ -1,19 +1,150 @@
 import java.util.*;
 
-class Adder {
-	
-	ArrayList<Boolean> add(ArrayList<Boolean> number1, ArrayList<Boolean> number2) {
+class Adder { //chooses whether to use addition or subtraction
+	ArrayList<Integer> checker (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+		int x_end = x.size()-1; //last index of x
+		int y_end = y.size()-1; //last index of y
 		
-		if ((number1.get(number1.size()) == true) && (number2.get(number2.size()) == true)) { // Both are negative
+		boolean x_pos = x.get(x_end) == 0; //check whether x is negative
+		x.remove(x_end);
+		boolean y_pos = y.get(y_end) == 0; //check whether y is negative
+		y.remove(y_end);
+		
+		while (x.size() < y.size()) {
+			x.add(0, 0);
+		}
+		while(y.size() < x.size()) {
+			y.add(0,0);
+		}
+		
+		ArrayList<Integer> result;
+		if (x_pos && y_pos) {
+			result = new Addition().add(x,y,b);
+			result.add(0);
+		}
+		else if (!x_pos && !y_pos) {
+			result = new Addition().add(x,y,b);
+			result.add(1);
+		}
+		else if (x_pos && !y_pos) {
+			result = new Subtraction().subtract(x,y,b);
+		}
+		else {
+			result = new Subtraction().subtract(y,x,b);	
+		}
+		while(result.get(0) == 0) {
+			result.remove(0);
+		}
+		return result;
+	}
+	
+}
+
+class Subtractor {
+	ArrayList<Integer> checker (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+		int x_end = x.size()-1; //last index of x
+		int y_end = y.size()-1; //last index of y
+		
+		boolean x_pos = x.get(x_end) == 0; //check whether x is negative
+		x.remove(x_end);
+		boolean y_pos = y.get(y_end) == 0; //check whether y is negative
+		y.remove(y_end);
+		
+		while (x.size() < y.size()) {
+			x.add(0, 0);
+		}
+		while(y.size() < x.size()) {
+			y.add(0,0);
+		}
+		
+		ArrayList<Integer> result;
+		if (x_pos && y_pos) {
+			result = new Subtraction().subtract(x,y,b);
+		}
+		else if (!x_pos && !y_pos) {
+			result = new Subtraction().subtract(y,x,b);
+		}
+		else if (x_pos && !y_pos) {
+			result = new Addition().add(x,y,b);
+			result.add(0);
+		}
+		else {
+			result = new Addition().add(x,y,b);	
+			result.add(1);
+		}
+		while(result.get(0) == 0) {
+			result.remove(0);
+		}
+		return result;
+	}
+}
+
+class Addition {
+	ArrayList<Integer> add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+		int length = x.size()-1;
+		int carry = 0;
+		ArrayList<Integer> result = new ArrayList<>();
+		for(int i = length; i >= 0; i--) {
+			int digit =  x.get(i) + y.get(i)+ carry;
+			if (digit >= b) {
+				carry = 1;
+				digit -= b;
+			}
+			else {
+				carry = 0;
+			}
+			result.add(0,digit);
 			
-		} else if ((number1.get(number1.size()) == false) && (number2.get(number2.size()) == false)) { //both are positive
-				
-			} else 
+		}
 		
-		number1.remove(number1.size()-1); //Remove the sign bit from number1
-		number2.remove(number2.size()-1); //Remove the sign bit from number2
+		if (carry==1) {
+			result.add(0,1);
+		}
+		return result;
+	}
+}
+
+class Subtraction {
+	ArrayList<Integer> subtract (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+		int length = x.size()-1;
+		int carry = 0;
+		ArrayList<Integer> result = new ArrayList<>();
+		boolean swap = false;
 		
-		return null;
-	}	
-	
+		for(int i = 0; i <= length;i++) {
+			if (x.get(i) > y.get(i)) {
+				break;
+			}
+			else if (y.get(i) > x.get(i)) {
+				swap = true;
+				break;
+			}
+		}
+		if (swap) {
+			ArrayList<Integer> temp = y;
+			y=x;
+			x=temp;
+		}
+		for(int i = length; i >= 0; i--) {
+			int digit =  x.get(i) - y.get(i)- carry;
+			if (digit < 0) {
+				carry = 1;
+				digit += b;
+			}
+			else {
+				carry = 0;
+			}
+			result.add(0,digit);
+			
+		}
+		
+		if (swap) {
+			result.add(1);
+		}
+		else {
+			result.add(0);
+		}
+		
+		return result;
+	}
 }
