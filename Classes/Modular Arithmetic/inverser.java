@@ -6,7 +6,8 @@ class Inverser {
     }
     
     ArrayList<Integer> invert (ArrayList<Integer> a, ArrayList<Integer> m, int base){
-        euclid.euclid(a, m, base);
+        if (euclid.euclid(a, m, base) == 1)
         return euclid.getA();
+        else return null;
     }
 }
