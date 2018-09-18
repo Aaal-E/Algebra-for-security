@@ -1,8 +1,8 @@
 import java.util.*;
 
-class mul {
+class Multiplier {
 	
-	ArrayList <Integer> multiply (ArrayList <Integer> x, ArrayList <Integer> y, int b ){
+	ArrayList <Integer> mul (ArrayList <Integer> x, ArrayList <Integer> y, int b ){
 		
 		int m = x.size();
 		int n = y.size();
@@ -31,7 +31,7 @@ class mul {
 		}
 		
 		if(z.get(m + n - 1) == 0)
-			k = m + n - 2;
+			k = m + n - 2;           //update the size of the result of the multiplication
 		else
 			k = m + n - 1;
 		
