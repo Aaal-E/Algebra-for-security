@@ -148,4 +148,9 @@ class Adder { //chooses whether to use addition or subtraction for addition
 		y = mod.mod(y, m, b);
 		return mod.mod(add(x, y, b), m, b);
 	}
+	ArrayList<Integer> sub (ArrayList <Integer> x, ArrayList <Integer> y, ArrayList <Integer> m, int b) {
+		x = mod.mod(x, m, b);
+		y = mod.mod(y, m, b);
+		return mod.mod(add(x, y, b), m, b);
+	}
 }
