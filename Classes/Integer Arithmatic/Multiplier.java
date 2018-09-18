@@ -2,6 +2,9 @@ import java.util.*;
 
 class Multiplier {
 	
+    ArrayList <Integer> countadd = new ArrayList <Integer>();
+    ArrayList <Integer> countmul = new ArrayList <Integer>();
+    
 	ArrayList <Integer> mul (ArrayList <Integer> x, ArrayList <Integer> y, int b ){
 		
 		int m = x.size();
@@ -10,8 +13,9 @@ class Multiplier {
 		int carry, t; //carry and dummy variable t
 		
 		ArrayList <Integer> z = new ArrayList <Integer>();
-		ArrayList <Integer> countadd = new ArrayList <Integer>();
-		ArrayList <Integer> countmul = new ArrayList <Integer>();
+		
+		countadd.clear();
+		countmul.clear();
 		
 		for (int i = n; i < m + n -1; i++)
 			z.set(i,0); //reset the resulting array z = xy.
@@ -41,18 +45,19 @@ class Multiplier {
 		          
 		countadd.add(0,m + m*(n * 7) + 6);  //first for + second for (==) + if -Is this correct?
 		countmul.add (0,m * n * 3);        // is this correct?
-		
-        ArrayList <Integer> getCountAdd () {
-        	
-		 return countadd;  
-		}
-		
-		ArrayList <Integer> getCountMul () {
-			
-		 return countmul;
-		}
+        
 				
 		return z; // [z]_b in the usual form sum_{0}^{k} ( z_i* b^{i)
 
 	}
+	ArrayList<Integer> getCountAdd() {
+			
+	    return countadd;  
+    }
+       
+    ArrayList<Integer> getCountMul() {
+           
+        return countmul;
+    }
+		
 }
