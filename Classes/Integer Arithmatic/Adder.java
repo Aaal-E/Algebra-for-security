@@ -17,22 +17,22 @@ class Adder { //chooses whether to use addition or subtraction
 			y.add(0,0);
 		}
 		
-		ArrayList<Integer> result;
-		if (x_pos && y_pos) {
+		ArrayList<Integer> result; 
+		if (x_pos && y_pos) { // case 1: both x and y are positive
 			result = do_add(x,y,b);
 			result.add(0);
 		}
-		else if (!x_pos && !y_pos) {
+		else if (!x_pos && !y_pos) { //case 2: both x and y are negative
 			result = do_add(x,y,b);
 			result.add(1);
 		}
-		else if (x_pos && !y_pos) {
+		else if (x_pos && !y_pos) { // case 3: x is positive and y is negative
 			result = do_sub(x,y,b);
 		}
 		else {
-			result = do_sub(y,x,b);	
+			result = do_sub(y,x,b);	//case 4: x is negative and y is positive
 		}
-		while(result.get(0) == 0) {
+		while(result.get(0) == 0) { //remove the insignificant zeroes from the result
 			result.remove(0);
 		}
 		return result;
@@ -56,21 +56,21 @@ class Adder { //chooses whether to use addition or subtraction
 		}
 		
 		ArrayList<Integer> result;
-		if (x_pos && y_pos) {
+		if (x_pos && y_pos) { // case 1: both x and y are positive
 			result = do_sub(x,y,b);
 		}
-		else if (!x_pos && !y_pos) {
+		else if (!x_pos && !y_pos) { //case 2: both x and y are negative
 			result = do_sub(y,x,b);
 		}
-		else if (x_pos && !y_pos) {
+		else if (x_pos && !y_pos) { // case 3: x is positive and y is negative
 			result = do_add(x,y,b);
 			result.add(0);
 		}
-		else {
+		else { //case 4: x is negative and y is positive
 			result = do_add(x,y,b);	
 			result.add(1);
 		}
-		while(result.get(0) == 0) {
+		while(result.get(0) == 0) { //remove the insignificant zeroes from the result
 			result.remove(0);
 		}
 		return result;
@@ -80,7 +80,8 @@ class Adder { //chooses whether to use addition or subtraction
 		int length = x.size()-1;
 		int carry = 0;
 		ArrayList<Integer> result = new ArrayList<>();
-		for(int i = length; i >= 0; i--) {
+		
+		for(int i = length; i >= 0; i--) { // adds the digits in x and y to each other, with a carry if necessary 
 			int digit =  x.get(i) + y.get(i)+ carry;
 			if (digit >= b) {
 				carry = 1;
@@ -105,8 +106,8 @@ class Adder { //chooses whether to use addition or subtraction
 		ArrayList<Integer> result = new ArrayList<>();
 		boolean swap = false;
 		
-		for(int i = 0; i <= length;i++) {
-			if (x.get(i) > y.get(i)) {
+		for(int i = 0; i <= length;i++) { // checks whether swapping is necessary, depending on which number is the biggest
+			if (x.get(i) > y.get(i)) { 
 				break;
 			}
 			else if (y.get(i) > x.get(i)) {
@@ -119,7 +120,7 @@ class Adder { //chooses whether to use addition or subtraction
 			y=x;
 			x=temp;
 		}
-		for(int i = length; i >= 0; i--) {
+		for(int i = length; i >= 0; i--) { // subtracts the digits in x and y from each other, with a carry if necessary
 			int digit =  x.get(i) - y.get(i)- carry;
 			if (digit < 0) {
 				carry = 1;
@@ -133,10 +134,10 @@ class Adder { //chooses whether to use addition or subtraction
 		}
 		
 		if (swap) {
-			result.add(1);
+			result.add(1); // if you swapped, the result is negative
 		}
 		else {
-			result.add(0);
+			result.add(0); // no swap means that you get a positive number
 		}
 		
 		return result;
