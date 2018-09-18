@@ -10,9 +10,8 @@ class Multiplier {
 		int carry, t; //carry and dummy variable t
 		
 		ArrayList <Integer> z = new ArrayList <Integer>();
-		
-		countadd.clear();
-		countmul.clear();
+		ArrayList <Integer> countadd = new ArrayList <Integer>();
+		ArrayList <Integer> countmul = new ArrayList <Integer>();
 		
 		for (int i = n; i < m + n -1; i++)
 			z.set(i,0); //reset the resulting array z = xy.
@@ -44,7 +43,7 @@ class Multiplier {
 		countmul.add (0,m * n * 3);        // is this correct?
 		
         ArrayList <Integer> getCountAdd () {
-			
+        	
 		 return countadd;  
 		}
 		
@@ -55,8 +54,5 @@ class Multiplier {
 				
 		return z; // [z]_b in the usual form sum_{0}^{k} ( z_i* b^{i)
 
-	}
-	public static void main (String [] args ) {
-		
 	}
 }
