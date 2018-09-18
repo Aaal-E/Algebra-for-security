@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Multiplier {
+class mul {
 	
 	ArrayList <Integer> multiply (ArrayList <Integer> x, ArrayList <Integer> y, int b ){
 		
@@ -11,6 +11,9 @@ class Multiplier {
 		
 		ArrayList <Integer> z = new ArrayList <Integer>();
 		
+		countadd.clear();
+		countmul.clear();
+		
 		for (int i = n; i < m + n -1; i++)
 			z.set(i,0); //reset the resulting array z = xy.
 		
@@ -20,10 +23,9 @@ class Multiplier {
 				
 			   t = z.get(i+j) + x.get(i)*y.get(j) + carry; //do the multiplication with carry
 			   
-			   carry = Math.floorDiv(t, b);
+			   carry = Math.floorDiv(t, b); //update the carry
 			   
-			   z.set(i+j, t - carry*b);	//t - carry * b = t mod b = t % b. See if this 
-			                            //makes any difference, computationally
+			   z.set(i+j, t - carry*b);	//t - carry * b = t mod b = t % b. 
 			}
 			z.set(i+n, carry); //store the new carry
 		}
@@ -38,10 +40,20 @@ class Multiplier {
 		else
 			z.set(k, 0);    //if both pos or negative, the result is positive.
 		          
-		countAdd = m + m*(n * 7) + 6;  //first for + second for (==) + if -Is this correct?
-		countMul = m * n * 3;         // is this correct?
+		countadd.add(0,m + m*(n * 7) + 6);  //first for + second for (==) + if -Is this correct?
+		countmul.add (0,m * n * 3);        // is this correct?
+		
+        ArrayList <Integer> getCountAdd () {
+			
+		 return countadd;  
+		}
+		
+		ArrayList <Integer> getCountMul () {
+			
+		 return countmul;
+		}
 				
-		return z; // [z]_b in the usual form sum_{0}^{m+n-1} ( z_i* b^{i)
+		return z; // [z]_b in the usual form sum_{0}^{k} ( z_i* b^{i)
 
 	}
 	public static void main (String [] args ) {
