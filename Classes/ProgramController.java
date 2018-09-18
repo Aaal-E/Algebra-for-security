@@ -11,6 +11,7 @@ class ProgramController {
 	Formatter formatter = new Formatter();
 	ArrayList<Integer> countadd;
 	ArrayList<Integer> countmul;
+	Adder adder = new Adder();
 	
 	void run() {
 		while((command = formatter.nextInput()) != null) { //keep reading inputs until the file ends
@@ -41,8 +42,8 @@ class ProgramController {
 	    case "[answer]": {
 	        switch (currentcommand) {
 	        case "add": {
-	            if(m.size()>0);  //formatter.print(calc.add(x,y,base), base);
-	            else ; //formatter.print(calc.add(x,y,m,base), base);
+	            if(m.size()>0) formatter.print(adder.add(x,y,base), base);
+	            else ;//formatter.print(adder.add(x,y,m,base), base);
 	            m.clear();
 	        }
 	            
