@@ -14,6 +14,8 @@ class Multiplier {
 		
 		ArrayList <Integer> z = new ArrayList <Integer>();
 		
+		countadd.clear();
+		countmul.clear();
 		
 		for (int i = n; i < m + n -1; i++)
 			z.set(i,0); //reset the resulting array z = xy.
@@ -49,7 +51,7 @@ class Multiplier {
 
 	}
 	ArrayList<Integer> getCountAdd() {
-        
+			
 	    return countadd;  
     }
        
@@ -57,6 +59,7 @@ class Multiplier {
            
         return countmul;
     }
+<<<<<<< HEAD:Classes/Integer Arithmatic/Muliplier.java
     
     ArrayList<Integer> mul (ArrayList <Integer> x, ArrayList <Integer> y, ArrayList<Integer> m, int b ){
         x = mod.mod(x, m, b);
@@ -64,3 +67,7 @@ class Multiplier {
         return mod.mod(mul(x, y, b), m, b);
     }
 }
+=======
+		
+}
+>>>>>>> aa343c107378343b7169c1ab0b4c97785928a9bc:Classes/Integer Arithmatic/Multiplier.java
