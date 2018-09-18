@@ -4,8 +4,8 @@ class Modulator {
     Modulator(){
         Divider div = new Divider();
     }
-    ArrayList<Integer> mod(ArrayList<Integer> a, int base){
-        div.div(a, base);
+    ArrayList<Integer> mod(ArrayList<Integer> a, ArrayList<Integer> mod, int base){
+        div.div(a, mod, base);
         return div.getRemainder();
     }
 }

@@ -1,10 +1,12 @@
 \documentclass[a4paper]{article}
 
+\usepackage{hyperref}
+
 \title{Assignment 2WF90, Integer Arithmetic, September 2018}
 \author{
-    Someone
+    Tim
     \and
-    Someone else
+    Alex
     \and
     Maarten Visscher\\
     \texttt{0888263}
@@ -24,9 +26,21 @@
 
 \begin{document}
 
+
 \maketitle
 
+
+
+\begin{abstract}
+Optionally an abstract.
+\end{abstract}
+
+\section*{Introduction}
+
 \tableofcontents
+
+
+
 
 \section{Run instructions}
 
@@ -34,9 +48,13 @@
 
 % Describe what your approach is: how you represent various objects, how users should input polynomials, etc. Show, by including, for example, screenshots of your program at work, that your set-up works.
 
+
+\subsection{Run examples}
+
+
 \section{Code layout}
 
-\paragraph{Big integer representation (class BigNumber)}
+\subsection{Big integer representation (class BigNumber)}
 
 The representation of big integers is done using an array of normal 32-bit integers.
 Each element in the array corresponds to one digit from the original input.
@@ -47,7 +65,41 @@ If the value at index $n$ is 0, the sign is positive, if the value is $1$, the s
 As an example, if the input is $-345$, the resulting array is $\{5, 4, 3, 1\}$.
 For the input $123$ the resulting array is $\{3, 2, 1, 0\}$.
 
-\section{References}
+Book \cite{ant}.
+
+\section{Discussion}
+
+% Present some examples of different word sizes and radices, and compare elementary operation counts of primary school and Karatsuba methods. Draw a conclusion based on the theory.
+
+
+
+\section{Limitations}
+
+% Base > 32-bit?
+
+
+\section{Contributions}
+
+\paragraph{Code}
+
+Tim and Alex.
+
+\paragraph{Documentation}
+
+Maarten.
+
+
+\begin{thebibliography}{9}
+
+\bibitem{ant}
+  Benne de Weger,
+  2WF70 - Algorithmic Algebra and Number Theory,
+  2WF90 - Algebra for Security,
+  Part 1 - Algorithmic Number Theory,
+  version 0.65,
+  December 15, 2017
+
+\end{thebibliography}
 
 
 \end{document}
