@@ -11,6 +11,10 @@ class ProgramController {
 	Formatter formatter = new Formatter();
 	ArrayList<Integer> countadd;
 	ArrayList<Integer> countmul;
+	Adder adder = new Adder();
+	ArrayList<Integer> a;
+	ArrayList<Integer> b;
+	Multiplier multiplier = new Multiplier();
 	
 	void run() {
 		while((command = formatter.nextInput()) != null) { //keep reading inputs until the file ends
@@ -38,33 +42,36 @@ class ProgramController {
 	    
 	    
 	    
-	    case "[answer]": {
+	    case "[answer]": {  //process the commands previously read, and output the output
 	        switch (currentcommand) {
 	        case "add": {
-	            if(m.size()>0);  //formatter.print(calc.add(x,y,base), base);
-	            else ; //formatter.print(calc.add(x,y,m,base), base);
+	            if(m.size()>0) formatter.print(adder.add(x,y,base), base);
+	            else ;//formatter.print(adder.add(x,y,m,base), base);
 	            m.clear();
 	        }
 	            
 	        case "subtract": {
-	            if(m.size()>0); //formatter.print(calc.sub(x,y,base), base);
+	            if(m.size()>0) formatter.print(adder.sub(x,y,base), base);
                 else ; //formatter.print(calc.sub(x,y,m,base), base);
                 m.clear();
 	        }
 	            
 	        case "multiply": {
 	            if(m.size()>0) {
-	                //formatter.print(calc.mul(x,y,base), base);
+	                //formatter.print(multiplier.mul(x,y,base), base);
 	                //countadd = amount of additions
 	                //countmul = amount of multiplications
 	            } else {
-	                //formatter.print(calc.mul(x,y,m,base), base);
-                    //countadd = amount of additions
-                    //countmul = amount of multiplications
+	                //formatter.print(multiplier.mul(x,y,m,base), base);
+                    //countadd = multiplier.getCountAdd();
+                    //countmul = multiplier.getCountMul();
 	            }
 	            m.clear();
 	        }
 	        
+	        case "reduce": ;
+	        
+	        case "inverse": ;
 	        }    
 	    }
 	    
@@ -73,6 +80,23 @@ class ProgramController {
 	    case "[count-mul]": formatter.print(countmul);
 	    
 	    case "[m]": m = formatter.store(formatter.nextInput(), base);
+	    
+	    case "[reduce]": currentcommand = "reduce";
+	    
+	    case "[inverse]": currentcommand = "inverse";
+	    
+	    case "[euclid]": currentcommand = "euclid";
+	    
+	    case "[answ-a]": formatter.print(a);
+	    
+	    case "[answ-b]": formatter.print(b);
+	    
+	    case "[answ-d]": if(currentcommand == "euclid"){
+	        //formatter.print(euclid.run(x, y, base), base);
+	        //a = a
+	        //b = b
+	            
+	    }
 	    }
 	}
 	
