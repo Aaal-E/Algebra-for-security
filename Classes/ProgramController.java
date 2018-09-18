@@ -50,36 +50,36 @@ class ProgramController {
 	        switch (currentcommand) {
 	        case "add": {
 	            if(m.size()>0) formatter.print(adder.add(x,y,base), base);
-	            else ;//formatter.print(adder.add(x,y,m,base), base);
+	            else formatter.print(adder.add(x,y,m,base), base);
 	            m.clear();
 	        }
 	            
 	        case "subtract": {
 	            if(m.size()>0) formatter.print(adder.sub(x,y,base), base);
-                else ; //formatter.print(calc.sub(x,y,m,base), base);
+                else ;//formatter.print(adder.sub(x,y,m,base), base);
                 m.clear();
 	        }
 	            
 	        case "multiply": {
 	            if(m.size()>0) {
-	                //formatter.print(multiplier.mul(x,y,base), base);
-	                //countadd = amount of additions
-	                //countmul = amount of multiplications
+	                formatter.print(multiplier.mul(x,y,base), base);
+	                countadd = multiplier.getCountAdd();
+	                countmul = multiplier.getCountMul();
 	            } else {
-	                //formatter.print(multiplier.mul(x,y,m,base), base);
-                    //countadd = multiplier.getCountAdd();
-                    //countmul = multiplier.getCountMul();
+	                formatter.print(multiplier.mul(x,y,m,base), base);
+                    countadd = multiplier.getCountAdd();
+                    countmul = multiplier.getCountMul();
 	            }
 	            m.clear();
 	        }
 	        
 	        case "reduce": {
-	            //formatter.print(modulator.mod(x, m, base));
+	            formatter.print(modulator.mod(x, m, base));
 	            m.clear();
 	        }
 	        
 	        case "inverse": {
-	            //result = inverser.invert(x, m, base);
+	            result = inverser.invert(x, m, base);
 	            if(result != null) formatter.print(result);
 	            else formatter.print("ERROR");
 	        }
