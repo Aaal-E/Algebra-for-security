@@ -14,6 +14,8 @@ class Multiplier {
 		
 		ArrayList <Integer> z = new ArrayList <Integer>();
 		
+		countadd.clear();
+		countmul.clear();
 		
 		for (int i = n; i < m + n -1; i++)
 			z.set(i,0); //reset the resulting array z = xy.
@@ -49,7 +51,7 @@ class Multiplier {
 
 	}
 	ArrayList<Integer> getCountAdd() {
-        
+			
 	    return countadd;  
     }
        
@@ -57,4 +59,5 @@ class Multiplier {
            
         return countmul;
     }
+		
 }
