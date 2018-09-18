@@ -1,6 +1,7 @@
 import java.util.*;
 
 class Adder { //chooses whether to use addition or subtraction for addition
+	Modulator mod = new Modulator();
 	ArrayList<Integer> add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
 		int x_end = x.size()-1; //last index of x
 		int y_end = y.size()-1; //last index of y
@@ -141,5 +142,10 @@ class Adder { //chooses whether to use addition or subtraction for addition
 		}
 		
 		return result;
+	}
+	ArrayList<Integer> add (ArrayList <Integer> x, ArrayList <Integer> y, ArrayList <Integer> m, int b) {
+		x = mod.mod(x, m, b);
+		y = mod.mod(y, m, b);
+		return mod.mod(add(x, y, b), m, b);
 	}
 }
