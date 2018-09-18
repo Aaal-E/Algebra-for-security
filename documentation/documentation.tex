@@ -67,6 +67,18 @@ For the input $123$ the resulting array is $\{3, 2, 1, 0\}$.
 
 Book \cite{ant}.
 
+\section{Integer arithmetic}
+
+\subsection{Addition and subtraction (Integer/Adder.java)}
+
+We start with determining whether we need to add the two numbers or whether we need to subtract.
+Addition of a positive and a negative number is equivalent to subtraction of two positive numbers.
+Addition of two negative numbers is equivalent to addition of two positive numbers, and adjusting the sign of the output
+(\cite{ant} page 3, section 1.3.1).
+This check is performed first in the function \texttt{add()}.
+After checking, the \texttt{do\_add} or \texttt{do\_sub} function is ran.
+
+
 \section{Discussion}
 
 % Present some examples of different word sizes and radices, and compare elementary operation counts of primary school and Karatsuba methods. Draw a conclusion based on the theory.

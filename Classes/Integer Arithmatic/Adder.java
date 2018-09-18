@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Adder { //chooses whether to use addition or subtraction
+class Adder { //chooses whether to use addition or subtraction for addition
 	ArrayList<Integer> add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
 		int x_end = x.size()-1; //last index of x
 		int y_end = y.size()-1; //last index of y
@@ -39,7 +39,7 @@ class Adder { //chooses whether to use addition or subtraction
 	}
 	
 
-	ArrayList<Integer> sub (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> sub (ArrayList <Integer> x, ArrayList <Integer> y, int b){//chooses whether to use addition or subtraction for subtraction
 		int x_end = x.size()-1; //last index of x
 		int y_end = y.size()-1; //last index of y
 		
@@ -76,7 +76,7 @@ class Adder { //chooses whether to use addition or subtraction
 		return result;
 	}
 
-	ArrayList<Integer> do_add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> do_add (ArrayList <Integer> x, ArrayList <Integer> y, int b){ // does addition
 		int length = x.size()-1;
 		int carry = 0;
 		ArrayList<Integer> result = new ArrayList<>();
@@ -100,7 +100,7 @@ class Adder { //chooses whether to use addition or subtraction
 		return result;
 	}
 
-	ArrayList<Integer> do_sub (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> do_sub (ArrayList <Integer> x, ArrayList <Integer> y, int b){ //does subtraction
 		int length = x.size()-1;
 		int carry = 0;
 		ArrayList<Integer> result = new ArrayList<>();
