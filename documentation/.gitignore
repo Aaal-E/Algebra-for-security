@@ -1,0 +1,6 @@
+# LaTeX ignores
+
+*.aux
+*.log
+*.pdf
+*.toc

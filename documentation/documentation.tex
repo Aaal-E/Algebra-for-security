@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+
+\title{Assignment 2WF90, Integer Arithmetic, September 2018}
+\author{
+    Someone
+    \and
+    Someone else
+    \and
+    Maarten Visscher\\
+    \texttt{0888263}
+}
+
+
+%  The document should at least contain:
+% – A title page with names, student id’s, assignment title (such as ‘Assignment 2WF90, Integer Arithmetic, September 2018’);
+% – Table of contents, division in sections.
+% – Where relevant references to literature and the lecture notes. List of references at the end of the document.
+% – A mathematical description of how your code works and what your code can do.
+% – A description of the limitations of your code.
+% – Illustrative examples.
+% – Each member’s contribution.
+
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Run instructions}
+
+% Include an explanation on how to install and run the software on a Windows platform.
+
+% Describe what your approach is: how you represent various objects, how users should input polynomials, etc. Show, by including, for example, screenshots of your program at work, that your set-up works.
+
+\section{Code layout}
+
+\paragraph{Big integer representation (class BigNumber)}
+
+The representation of big integers is done using an array of normal 32-bit integers.
+Each element in the array corresponds to one digit from the original input.
+For an original input of length $n$ digits, the element at index $0$ has the least significant digit,
+index $n-1$ has the most significant digit, and index $n$ stores the sign of the integer.
+If the value at index $n$ is 0, the sign is positive, if the value is $1$, the sign is negative.
+
+As an example, if the input is $-345$, the resulting array is $\{5, 4, 3, 1\}$.
+For the input $123$ the resulting array is $\{3, 2, 1, 0\}$.
+
+\section{References}
+
+
+\end{document}
