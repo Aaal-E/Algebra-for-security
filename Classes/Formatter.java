@@ -10,16 +10,16 @@ class Formatter {
     BufferedReader reader;
     PrintWriter writer;
     
-    Formatter(){
+    public Formatter(){
         try{
             reader = new BufferedReader(new FileReader("input.txt")); //we read via a buffered reader to easily read per line and character
-            writer = new PrintWriter("Output.txt", "UTF-8"); //we open a central printer to avoid overwriting part of the file with other classes
+            writer = new PrintWriter("output.txt", "UTF-8"); //we open a central printer to avoid overwriting part of the file with other classes
         } catch(IOException e) {
-            
+            throw new RuntimeException(e);
         }
     }
     
-    String nextInput() {
+    public String nextInput() {
         try{
             String result = "";
             int intValueOfChar;
@@ -36,6 +36,7 @@ class Formatter {
                 }
             }
         } catch(IOException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }

@@ -14,14 +14,15 @@ class ProgramController {
 	ArrayList<Integer> a;
 	ArrayList<Integer> b;
 	Multiplier multiplier = new Multiplier();
-	Modulator modulator = new Modulator();
+	//Modulator modulator = new Modulator();
 	ArrayList<Integer> result;
-	Inverser inverser = new Inverser();
+	//Inverser inverser = new Inverser();
 	
 	void run() {
 		while((command = formatter.nextInput()) != null) { //keep reading inputs until the file ends
 			parse(command);
 		}
+		formatter.closeWriter();
 	}
 	
 	void parse(String cmd) {
@@ -72,12 +73,12 @@ class ProgramController {
 	        }
 	        
 	        case "reduce": {
-	            formatter.print(modulator.mod(x, m, base));
+	            //formatter.print(modulator.mod(x, m, base));
 	            m.clear();
 	        }
 	        
 	        case "inverse": {
-	            result = inverser.invert(x, m, base);
+	            //result = inverser.invert(x, m, base);
 	            if(result != null) formatter.print(result);
 	            else formatter.print("ERROR");
 	        }

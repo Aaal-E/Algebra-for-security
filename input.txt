@@ -1,0 +1,167 @@
+# Example input / output file your program should be able to process
+#
+# Explanation: 
+#
+# empty line:        separates two computations   
+#
+# line starts with
+# #:                 comment, to be ignored by the program
+# [radix]:           the radix used in the next computation
+# [add]:             apply addition to the following two numbers
+# [subtract]:        apply subtraction to the following two numbers
+# [multiply]:        apply primary school multiplication to the following two numbers
+# [karatsuba]:       apply Karatsuba multiplication to the following two numbers
+# [x]:               first number to which the operation is to be applied
+# [y]:               second number to which the operation is to be applied
+# [answer]:          to be ignored if the file is input; 
+#                    the correct answer of the preceding computation if the file is output
+# [count-add]:       to be ignored if the file is input; 
+#                    count of the elementary additions and subtractions if the file is output
+# [count-mul]:       to be ignored if the file is input; 
+#                    count of the elementary multiplications if the file is output
+# [m]:               modulus to which the operation is to be applied 
+#                    (absent if integer arithmetic is done)  
+# [reduce]:          modular reduction
+# [inverse]:         modular inversion
+# [euclid]:          Euclid's Extended Algorithm
+# [answ-a]:          to be ignored if the file is input; 
+#                    a such that gcd(x,y) = a x + b y if the file is output
+# [answ-b]:          to be ignored if the file is input; 
+#                    b such that gcd(x,y) = a x + b y if the file is output
+# [answ-d]:          to be ignored if the file is input; 
+#                    gcd(x,y) if the file is output
+#
+# the [multiply] and [karatsuba] examples below use the same values for [x] and [y] 
+# (for the same [radix]); the answers your program produces should be equal too;
+# also below the correct answers are shown (but not the operation counts)
+
+[radix]  2 
+[add]
+[x]      1100110001011011110011101011100100000001010101111101001111010101111100110110001100010100001011111010
+[y]      1001011010110100010111100101110011001010001010001001010100111001010011000101001110000101000001010111
+[answer] 10110001100010000001011010001010111001011100000000110100100001111001111111011011010011001001101010001
+
+[radix]  2 
+[subtract]
+[x]      1111001001111000100100000101010011011111111101100110100101110101101100100110001010011101011010001011
+[y]      1001011010100110111010101000101110010010111011100100111101010001011000110110100111011000110001011111
+[answer] 101101111010001101001011100100101001101000010000001101000100100010011101111100011000100101000101100
+
+[radix]  2 
+[multiply]
+[x]      1111001110011011011101001100010101111000011010100100001101011101111101101110010001111010001010110011
+[y]      1110110000001110100000101100010100101010110001101100011011101000101001001001000100001111010100100110
+[answer] 11100000101000010001111010010110111111100111000001010111101100100100001100000010011011111001001001111100000010010100100011101011001011000101101001100010110001000001001000100011100001110111010110010010
+[count-add] ...
+[count-mul] ...
+
+[radix]  2 
+[karatsuba]
+[x]      1111001110011011011101001100010101111000011010100100001101011101111101101110010001111010001010110011
+[y]      1110110000001110100000101100010100101010110001101100011011101000101001001001000100001111010100100110
+[answer] 11100000101000010001111010010110111111100111000001010111101100100100001100000010011011111001001001111100000010010100100011101011001011000101101001100010110001000001001000100011100001110111010110010010
+[count-add] ...
+[count-mul] ...
+
+[radix]  3 
+[add]
+[x]      1021002222220100111012120000201102021221
+[y]      1012200010211212111211101000010010220000
+[answer] 2110210010202020000000221000211120011221
+
+[radix]  3 
+[subtract]
+[x]      2021112002201010101201001221200211210001
+[y]      1211222222202101122110112222212210012122
+[answer] 102112002221201202020111221211001120102
+
+[radix]  3 
+[multiply]
+[x]      2010220211120222202210012012101022110011
+[y]      -2102021102022210001211210202210112011002
+[answer] -12012000201010022100110110121211221122212001010101210112211010012201102111111022
+[count-add] ...
+[count-mul] ...
+
+[radix]  3 
+[karatsuba]
+[x]      2010220211120222202210012012101022110011
+[y]      -2102021102022210001211210202210112011002
+[answer] -12012000201010022100110110121211221122212001010101210112211010012201102111111022
+[count-add] ...
+[count-mul] ...
+
+[radix]  16 
+[add]
+[x]      df9e76d113895821c567
+[y]      6a20b188675ab39e17a2
+[answer] 149bf28597ae40bbfdd09
+
+[radix]  16 
+[subtract]
+[x]      36d2b5154ab14bfabbf2
+[y]      f9d1495cfafe396ae4b1
+[answer] -c2fe9447b04ced7028bf
+
+[radix]  16 
+[multiply]
+[x]      -eed50d6aa53e51691add
+[y]      -f9027b863f654daae6a8
+[answer] e84f8af471ab1bb45d20f1a95313171b2ade2f08
+[count-add] ...
+[count-mul] ...
+
+[radix]  16 
+[karatsuba]
+[x]      -eed50d6aa53e51691add
+[y]      -f9027b863f654daae6a8
+[answer] e84f8af471ab1bb45d20f1a95313171b2ade2f08
+[count-add] ...
+[count-mul] ...
+
+[radix]  16
+[reduce]
+[x]      ffbd238907b7d47c8f011379ad54173b9502beb1
+[m]      c7eb8a91fbad0d1c1f03
+[answer] c0808380322a6abc359a
+
+[radix]  16
+[add]
+[x]      54311bd480c5d7f89db4
+[y]      96389ae5100438574eaf
+[m]      c7eb8a91fbad0d1c1f03
+[answer] 227e2c27951d0333cd60
+
+[radix]  16
+[subtract]
+[x]      62f73b5b5c02ab69e6f5
+[y]      7a3e5237d2111e1d46fd
+[m]      c7eb8a91fbad0d1c1f03
+[answer] b0a473b5859e9a68befb
+
+[radix]  16
+[multiply]
+[x]      44105f31659258bdf082
+[y]      86347b5906a96ca11cc2
+[m]      c7eb8a91fbad0d1c1f03
+[answer] 9c1b2bab5c0ca148e260
+
+[radix]  16
+[euclid]
+[x]      5896363941d32eccd5c
+[y]      c7eb8a91fbad0d1c1f03
+[answ-d] 1
+[answ-a] 96998fcd4268440ce6a5
+[answ-b] -42bb80ba0313b9aff19
+
+[radix]  16
+[inverse]
+[x]      5896363941d32eccd5c
+[m]      c7eb8a91fbad0d1c1f03
+[answer] 96998fcd4268440ce6a5
+
+[radix]  16
+[inverse]
+[x]      b99ab2815ee4b4a5f842
+[m]      c7eb8a91fbad0d1c1f03
+[answer] ERROR
