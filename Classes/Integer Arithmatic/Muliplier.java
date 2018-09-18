@@ -4,7 +4,7 @@ class Multiplier {
 	
     ArrayList <Integer> countadd = new ArrayList <Integer>();
     ArrayList <Integer> countmul = new ArrayList <Integer>();
-    
+    Modulator mod = new Modulator();
 	ArrayList <Integer> mul (ArrayList <Integer> x, ArrayList <Integer> y, int b ){
 		
 		int m = x.size();
@@ -56,5 +56,11 @@ class Multiplier {
     ArrayList<Integer> getCountMul() {
            
         return countmul;
+    }
+    
+    ArrayList<Integer> mul (ArrayList <Integer> x, ArrayList <Integer> y, ArrayList<Integer> m, int b ){
+        x = mod.mod(x, m, b);
+        y = mod.mod(y, m, b);
+        return mod.mod(mul(x, y, b), m, b);
     }
 }
