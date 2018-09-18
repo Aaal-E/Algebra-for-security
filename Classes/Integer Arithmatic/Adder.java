@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Adder { //chooses whether to use addition or subtraction
-	ArrayList<Integer> checker (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
 		int x_end = x.size()-1; //last index of x
 		int y_end = y.size()-1; //last index of y
 		
@@ -10,27 +10,27 @@ class Adder { //chooses whether to use addition or subtraction
 		boolean y_pos = y.get(y_end) == 0; //check whether y is negative
 		y.remove(y_end);
 		
-		while (x.size() < y.size()) {
+		while (x.size() < y.size()) { //makes x as large as y if x is smaller
 			x.add(0, 0);
 		}
-		while(y.size() < x.size()) {
+		while(y.size() < x.size()) { // makes y as large as x if y is smaller
 			y.add(0,0);
 		}
 		
 		ArrayList<Integer> result;
 		if (x_pos && y_pos) {
-			result = new Addition().add(x,y,b);
+			result = do_add(x,y,b);
 			result.add(0);
 		}
 		else if (!x_pos && !y_pos) {
-			result = new Addition().add(x,y,b);
+			result = do_add(x,y,b);
 			result.add(1);
 		}
 		else if (x_pos && !y_pos) {
-			result = new Subtraction().subtract(x,y,b);
+			result = do_sub(x,y,b);
 		}
 		else {
-			result = new Subtraction().subtract(y,x,b);	
+			result = do_sub(y,x,b);	
 		}
 		while(result.get(0) == 0) {
 			result.remove(0);
@@ -38,10 +38,8 @@ class Adder { //chooses whether to use addition or subtraction
 		return result;
 	}
 	
-}
 
-class Subtractor {
-	ArrayList<Integer> checker (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> sub (ArrayList <Integer> x, ArrayList <Integer> y, int b){
 		int x_end = x.size()-1; //last index of x
 		int y_end = y.size()-1; //last index of y
 		
@@ -59,17 +57,17 @@ class Subtractor {
 		
 		ArrayList<Integer> result;
 		if (x_pos && y_pos) {
-			result = new Subtraction().subtract(x,y,b);
+			result = do_sub(x,y,b);
 		}
 		else if (!x_pos && !y_pos) {
-			result = new Subtraction().subtract(y,x,b);
+			result = do_sub(y,x,b);
 		}
 		else if (x_pos && !y_pos) {
-			result = new Addition().add(x,y,b);
+			result = do_add(x,y,b);
 			result.add(0);
 		}
 		else {
-			result = new Addition().add(x,y,b);	
+			result = do_add(x,y,b);	
 			result.add(1);
 		}
 		while(result.get(0) == 0) {
@@ -77,10 +75,8 @@ class Subtractor {
 		}
 		return result;
 	}
-}
 
-class Addition {
-	ArrayList<Integer> add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> do_add (ArrayList <Integer> x, ArrayList <Integer> y, int b){
 		int length = x.size()-1;
 		int carry = 0;
 		ArrayList<Integer> result = new ArrayList<>();
@@ -102,10 +98,8 @@ class Addition {
 		}
 		return result;
 	}
-}
 
-class Subtraction {
-	ArrayList<Integer> subtract (ArrayList <Integer> x, ArrayList <Integer> y, int b){
+	ArrayList<Integer> do_sub (ArrayList <Integer> x, ArrayList <Integer> y, int b){
 		int length = x.size()-1;
 		int carry = 0;
 		ArrayList<Integer> result = new ArrayList<>();
