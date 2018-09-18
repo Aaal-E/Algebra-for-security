@@ -14,9 +14,10 @@ class ProgramController {
 	ArrayList<Integer> a;
 	ArrayList<Integer> b;
 	Multiplier multiplier = new Multiplier();
-	//Modulator modulator = new Modulator();
+	Modulator modulator = new Modulator();
 	ArrayList<Integer> result;
-	//Inverser inverser = new Inverser();
+	Inverser inverser = new Inverser();
+	Euclid euclid = new Euclid();
 	
 	void run() {
 		while((command = formatter.nextInput()) != null) { //keep reading inputs until the file ends
@@ -103,9 +104,9 @@ class ProgramController {
 	    case "[answ-b]": formatter.print(b);
 	    
 	    case "[answ-d]": if(currentcommand == "euclid"){
-	        //formatter.print(euclid.run(x, y, base), base);
-	        //a = a
-	        //b = b
+	        formatter.print(euclid.euclid(x, y, base), base);
+	        a = euclid.getA();
+	        b = euclid.getB();
 	            
 	    }
 	    }
