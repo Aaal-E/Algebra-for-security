@@ -1,6 +1,6 @@
 import java.util.*;
 
-class divider {
+class Divider {
 	
 	ArrayList <Integer> r = new ArrayList <Integer>(); //initialize the remainder
 	
