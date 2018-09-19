@@ -5,3 +5,7 @@
 
 # Output file
 output.txt
+
+# IntelliJ
+*.iml
+.idea/
