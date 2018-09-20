@@ -5,6 +5,13 @@ class Adder { //chooses whether to use addition or subtraction for addition
 
     ArrayList<Integer> add(ArrayList<Integer> x, ArrayList<Integer> y, int b) {
         //TODO: fix 0+0
+    	
+    	if (/*first bit is zero and length is 2 for x*/) {
+    		return result = y
+    	}
+    	if (/*first bit is zero and length is 2 for y*/) {
+    		return result = x
+    	}
 
         // Reverse the lists since they were originally assumed to be the other way around
         Collections.reverse(x);
@@ -56,7 +63,13 @@ class Adder { //chooses whether to use addition or subtraction for addition
         Collections.reverse(x);
         Collections.reverse(y);
 
-
+        if (/*first bit is zero and length is 2 for x*/) {
+    		return result = null
+    	}
+    	if (/*first bit is zero and length is 2 for y*/) {
+    		return result = null
+    	}
+        
         int x_end = x.size() - 1; //last index of x
         int y_end = y.size() - 1; //last index of y
 
