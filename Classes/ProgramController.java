@@ -6,14 +6,14 @@ public class ProgramController {
     String command;
     int radix = 2;
     String commandtype = "";
-    BigInteger x;
-    BigInteger y;
-    BigInteger m;
-    int countadd;
-    int countmul;
+    ArrayList<Integer> x = new ArrayList<>();
+    ArrayList<Integer> y = new ArrayList<>();
+    ArrayList<Integer> m = new ArrayList<>();
+    long countadd;
+    long countmul;
     Adder adder = new Adder();
-    ArrayList<Integer> a;
-    ArrayList<Integer> b;
+    ArrayList<Integer> a = new ArrayList<>();
+    ArrayList<Integer> b = new ArrayList<>();
     Multiplier multiplier = new Multiplier();
     Modulator modulator = new Modulator();
     ArrayList<Integer> result;
@@ -26,16 +26,21 @@ public class ProgramController {
         IO io = new IO(reader, writer);
 
         // Keep reading inputs until the file ends
-        Command cmd;
-        while ((cmd = io.next()) != null) {
-            process(cmd);
+        try {
+            Command cmd;
+            while ((cmd = io.next()) != null) {
+                process(io, cmd);
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
         }
 
         reader.close();
         writer.close();
     }
 
-    private void process(Command cmd) {
+    private void process(IO io, Command cmd) {
         switch (cmd.command) {
             case "radix":
                 radix = Integer.parseInt(cmd.argument);
@@ -54,17 +59,17 @@ public class ProgramController {
                 break;
 
             case "x":
-                x = new BigInteger(cmd.argument, radix);
+                x = new BigInteger(cmd.argument, radix).getIntegerLegacy();
                 System.out.printf("x: %s\n", x);
                 break;
 
             case "y":
-                y = new BigInteger(cmd.argument, radix);
+                y = new BigInteger(cmd.argument, radix).getIntegerLegacy();
                 System.out.printf("y: %s\n", y);
                 break;
 
             case "m":
-                m = new BigInteger(cmd.argument, radix);
+                m = new BigInteger(cmd.argument, radix).getIntegerLegacy();
                 System.out.printf("m: %s\n", m);
                 break;
 
@@ -72,61 +77,65 @@ public class ProgramController {
             case "answer":  //process the commands previously read, and output the output
                 switch (commandtype) {
                     case "add":
-//                        if (m.size() > 0) formatter.print(adder.add(x, y, radix), radix);
-//                        else formatter.print(adder.add(x, y, m, radix), radix);
-//                        m.clear();
+                        if (m.size() > 0) io.print(adder.add(x, y, m, radix), radix);
+                        else io.print(adder.add(x, y, radix), radix);
+                        m.clear();
+                        break;
 
                     case "subtract":
-//                        if (m.size() > 0) formatter.print(adder.sub(x, y, radix), radix);
-//                        else ;//formatter.print(adder.sub(x,y,m,base), base);
-//                        m.clear();
+                        if (m.size() > 0) {
+                            io.print(adder.sub(x, y, m, radix), radix);
+                        } else {
+                            io.print(adder.sub(x, y, radix), radix);
+                        }
+                        m.clear();
                         break;
 
                     case "multiply":
-//                        if (m.size() > 0) {
-//                            formatter.print(multiplier.mul(x, y, radix), radix);
-//                            countadd = multiplier.getCountAdd();
-//                            countmul = multiplier.getCountMul();
-//                        } else {
-//                            formatter.print(multiplier.mul(x, y, m, radix), radix);
-//                            countadd = multiplier.getCountAdd();
-//                            countmul = multiplier.getCountMul();
-//                        }
-//                        m.clear();
+                        if (m.size() > 0) {
+                            io.print(multiplier.mul(x, y, radix), radix);
+                            countadd = multiplier.getCountAdd();
+                            countmul = multiplier.getCountMul();
+                        } else {
+                            io.print(multiplier.mul(x, y, m, radix), radix);
+                            countadd = multiplier.getCountAdd();
+                            countmul = multiplier.getCountMul();
+                        }
+                        m.clear();
                         break;
 
                     case "reduce":
-//                        formatter.print(modulator.mod(x, m, radix));
-//                        m.clear();
+                        io.print(modulator.mod(x, m, radix), radix);
+                        m.clear();
                         break;
 
                     case "inverse":
-//                        result = inverser.invert(x, m, radix);
-//                        if (result != null) formatter.print(result);
-//                        else formatter.print("ERROR");
+                        result = inverser.invert(x, m, radix);
+                        if (result != null) io.print(result, radix);
+                        else io.print("ERROR");
                         break;
                 }
                 break;
 
             case "count-add":
-                //formatter.print(countadd);
+                io.print(countadd);
                 break;
 
             case "count-mul":
-                //formatter.print(countmul);
+                io.print(countmul);
                 break;
 
             case "answ-a":
-                //formatter.print(a);
+                io.print(a, radix);
                 break;
 
             case "answ-b":
-                //formatter.print(b);
+                io.print(b, radix);
                 break;
 
             case "answ-d":
                 if (commandtype.equals("euclid")) {
-                    //formatter.print(euclid.euclid(x, y, radix), radix);
+                    io.print(euclid.euclid(x, y, radix), radix);
                     a = euclid.getA();
                     b = euclid.getB();
                 }
@@ -135,6 +144,7 @@ public class ProgramController {
     }
 
     public static void main(String[] args) throws IOException {
+
         new ProgramController().run();
     }
 }

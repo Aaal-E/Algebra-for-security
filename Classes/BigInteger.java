@@ -11,13 +11,14 @@ import java.util.*;
 class BigInteger {
 
     public final int radix;
-    private final List<Integer> integer = new ArrayList<>();
+    private final List<Integer> integer;
 
     /**
      * Creates the big integer from a string.
      */
     public BigInteger(String number, int radix) {
         this.radix = radix;
+        this.integer = new ArrayList<>();
 
         int neg = 0;
         if (number.substring(0, 1).equals("-")) {
@@ -29,6 +30,11 @@ class BigInteger {
             integer.add(Integer.parseInt(number.substring(i, i + 1), radix));
         }
         integer.add(neg);
+    }
+
+    public BigInteger(List<Integer> n, int radix) {
+        this.radix = radix;
+        this.integer = new ArrayList<>(n);
     }
 
     /**

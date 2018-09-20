@@ -4,5 +4,6 @@
 	<classpathentry excluding="Integer Arithmatic/|Modular Arithmetic/" kind="src" path="Classes"/>
 	<classpathentry kind="src" path="Classes/Integer Arithmatic"/>
 	<classpathentry kind="src" path="Classes/Modular Arithmetic"/>
+	<classpathentry kind="test" path="test/"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

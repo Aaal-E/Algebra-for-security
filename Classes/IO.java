@@ -60,6 +60,9 @@ public class IO {
         List<String> noCopy = Arrays.asList("answer", "count-add", "count-mul", "answ-a", "answ-b", "answ-d");
         if (!noCopy.contains(command)) {
             writer.println(line);
+        } else {
+            // Make space for the answer
+            writer.printf("[%s] ", command);
         }
 
         return new Command(command, argument);
@@ -67,30 +70,38 @@ public class IO {
 
     //print a line using the printer
     public void print(String str) {
-        writer.print(str);
-    }
-
-    //print a number
-    void print(ArrayList<Integer> number) {
-//        print(toString(number));
+        writer.println(str);
     }
 
     //print a number in a given base
     void print(ArrayList<Integer> number, int base) {
-//        print(toString(number, base));
+        print(toString(number, base));
     }
 
-    //print a number with added prefix
-    void print(String str, ArrayList<Integer> number) {
-//        str = str + toString(number);
-        print(str);
-    }
 
     //print a number in a given base with added prefix
-    void println(String str, ArrayList<Integer> number, int base) {
-//        str = str + toString(number, base);
+    void print(String str, ArrayList<Integer> number, int base) {
+        str = str + toString(number, base);
         print(str);
     }
 
+    void print(long l) {
+        print(Long.toString(l));
+    }
+
+    /**
+     * Returns a string representation using given radix.
+     */
+    public static String toString(ArrayList<Integer> n, int radix) {
+        BigInteger bigint = new BigInteger(n, radix);
+        StringBuilder result = new StringBuilder();
+        if (bigint.isNegative()) {
+            result.append('-');
+        }
+        for (int i = bigint.getIntegerLegacy().size() - 2; i >= 0; i--) {
+            result.append(Integer.toString(bigint.getIntegerLegacy().get(i), radix));
+        }
+        return result.toString();
+    }
 
 }
