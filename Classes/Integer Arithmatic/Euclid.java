@@ -1,23 +1,24 @@
 import java.util.*;
 
 class Euclid {
-    Divider divider = new Divider();
-    Adder adder = new Adder();
-    Multiplier multiplier = new Multiplier();
-    List<Integer> a;
-    List<Integer> b;
-    List<Integer> aa;
-    List<Integer> bb;
-    List<Integer> a_;
-    List<Integer> b_;
-    List<Integer> q;
-    List<Integer> remainder;
+
+    private List<Integer> a;
+    private List<Integer> b;
 
     List<Integer> euclid(List<Integer> x, List<Integer> y, int base) {
-        a.clear();
-        b.clear();
-        a_.clear();
-        b_.clear();
+        Divider divider = new Divider();
+        Adder adder = new Adder();
+        Multiplier multiplier = new Multiplier();
+
+        a = new ArrayList<>();
+        b = new ArrayList<>();
+        List<Integer> aa;
+        List<Integer> bb;
+        List<Integer> a_ = new ArrayList<>();
+        List<Integer> b_ = new ArrayList<>();
+        List<Integer> q;
+        List<Integer> remainder;
+
         a.add(1);
         a.add(0);
         a_.add(0);

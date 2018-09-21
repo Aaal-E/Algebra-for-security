@@ -83,6 +83,9 @@ class Divider {
             }
         }
 
+        q = q.subList(0, k - l + 1);
+        r = r.subList(0, l);
+
         // Add correct sign to quotient
         if (aPositive == bPositive) {
             // Both numbers have the same sign, quotient is positive
