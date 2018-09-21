@@ -87,6 +87,37 @@ This check is performed first in the function \texttt{add()}.
 After checking, the \texttt{do\_add} or \texttt{do\_sub} function is ran.
 
 
+\subsection{Division}
+
+The division with remainder implementation is based on [\cite{ant} Algorithm 1.4].
+For inputs $x, y$ consisting of words in base $b$ it computes $q, r$ with $x=qy+r$ and $0 \le r < y$.
+Prior to running the division algorithm, we first take the absolute values of the inputs.
+Using these positive values we run the algorithm.
+Afterwards the sign is corrected.
+
+\paragraph{Division with nonnegative integers}
+$m$ denotes the number of words in $x$, $n$ denotes the number of words in $y$.
+
+Step 1: $r \gets x$, $k \gets m - n + 1$.
+
+Step 2: \textbf{for} $i = k-1, k-2, \ldots, 0$ \textbf{do:}
+$q_i \gets \lfloor r / (b^i y) \rfloor$ and $r \gets r - q_i b^i y$.
+For the computation of $q_i$ we use the approximation as explained in [\cite{ant}].
+We divide the one or two most significant words in the numerator with the single most significant word in the denominator. The algorithm ensures that the number of words in the numerator will be at most one more than the number of words in the denominator.
+The elementary division operation that needs to be performed hereby is with at most two words for the numerator and one word for the denominator.
+The approximation is good when the denominator for the approximation is larger or equal than $\frac{1}{2} b$. If that is not the case, we double the original numerator and denominator until we have that approximation denominator is greater than or equal to $\frac{1}{2} b$. (This will not make the denominator overflow, i.e. will not add a one higher most significant word).
+Using the approximation for $q_i$ we reduce the remainder by $q_i b^i y$.
+If we have $0 \le r < y$ we are good, else we adjust $q_i$ and $r$ accordingly.
+
+% TODO
+
+
+\paragraph{Sign correction}
+
+For quotient $q$ we have: $q$ is positive $\iff$ ($x$ and $y$ are positive $\lor$ $x$ and $y$ are negative).
+
+For remainder $r$ we have: $r$ is positive $\iff$ $x$ is positive.
+
 \section{Discussion}
 
 % Present some examples of different word sizes and radices, and compare elementary operation counts of primary school and Karatsuba methods. Draw a conclusion based on the theory.

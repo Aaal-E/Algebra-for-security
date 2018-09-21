@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,29 +10,6 @@ public class IO {
     public IO(Reader reader, Writer writer) {
         this.reader = new BufferedReader(reader);
         this.writer = new PrintWriter(writer);
-    }
-
-    public String nextInput() {
-        try {
-            String result = "";
-            int intValueOfChar;
-            while ((intValueOfChar = reader.read()) != -1) { //stop at end of file
-                writer.print((char) intValueOfChar);
-                String temp;
-                if (intValueOfChar == '#') {
-                    temp = reader.readLine(); //ignore lines after #
-                    writer.println(temp);
-                } else if (intValueOfChar == ' ') {
-                    if (result != "")
-                        return result; //return the end of a word when encountering a space, but only if there is a word read
-                } else {
-                    result += (char) intValueOfChar; //add the read character to the resulting word
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
     }
 
     /**
@@ -78,8 +54,8 @@ public class IO {
     /**
      * Prints a number with a linebreak at the end.
      */
-    void print(List<Integer> number, int base) {
-        print(toString(number, base));
+    void print(List<Integer> number, int radix) {
+        print(Formatter.toString(number, radix));
     }
 
     /**
@@ -88,12 +64,4 @@ public class IO {
     void print(long l) {
         print(Long.toString(l));
     }
-
-    /**
-     * Returns a string representation using given radix.
-     */
-    private static String toString(List<Integer> n, int radix) {
-        return new BigInteger(n, radix).toString();
-    }
-
 }

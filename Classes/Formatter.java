@@ -1,51 +1,53 @@
-/*
-	handles the in and output to and from files, as well as the conversion from our storage format to a printable format
-*/
-
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Conversion between string and big integer.
+ */
 public class Formatter {
 
+    /**
+     * Returns a string representation using given radix.
+     */
+    public static String toString(List<Integer> n, int radix) {
+        // Remove leading zeros to be sure
+        BigInt.removeLeadingZeros(n);
 
-    //converts the array to a binary String
-    public static String toString(ArrayList<Integer> number) {
-        String result = "";
-        if (number.get(number.size()) == 1) result = result + "-";
-        number.remove(number.size());
-        for (int i = number.size(); i > 0; i--) {
-            result = result + number.get(i);
+        StringBuilder result = new StringBuilder();
+        if (BigInt.isNegative(n)) {
+            result.append('-');
         }
-        return result;
-    }
-
-    //converts the array to a String of base b
-    String toString(ArrayList<Integer> number, int base) {
-        String result = "";
-        if (number.get(number.size()) == 1) result = result + "-";
-        for (int i = number.size(); i > 0; i--) {
-            result = result + Integer.toString(number.get(i), base);
+        for (int i = n.size() - 2; i >= 0; i--) {
+            // Print the numbers
+            int number = n.get(i);
+            result.append(Integer.toString(number, radix));
         }
-        return result;
+        return result.toString();
     }
-
 
     /**
-     * Convert String to BigInteger
+     * Creates a big integer from a string.
      */
-    public static List<Integer> store(String str, int base) {
-        ArrayList<Integer> result = new ArrayList<Integer>();
+    public static List<Integer> toBigInt(String number, int radix) {
+        List<Integer> n = new ArrayList<>();
+
+        // Check sign
         int neg = 0;
-        if (str.substring(0, 1) == "-") {
-            str = str.substring(1, str.length());
+        if (number.substring(0, 1).equals("-")) {
+            number = number.substring(1);
             neg = 1;
         }
 
-        for (int i = str.length(); i > 0; i--) {
-            result.add(Integer.parseInt(str.substring(i, i + 1), base));
+        // Parse words
+        for (int i = number.length() - 1; i >= 0; i--) {
+            n.add(Integer.parseInt(number.substring(i, i + 1), radix));
         }
-        result.add(neg);
-        return result;
+        // Add sign
+        n.add(neg);
+
+        // Remove leading zeros to be sure
+        BigInt.removeLeadingZeros(n);
+
+        return n;
     }
 }

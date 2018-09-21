@@ -67,17 +67,17 @@ public class ProgramController {
                 break;
 
             case "x":
-                x = new BigInteger(cmd.argument, radix).getIntegerLegacy();
+                x = Formatter.toBigInt(cmd.argument, radix);
                 System.out.printf("x: %s\n", x);
                 break;
 
             case "y":
-                y = new BigInteger(cmd.argument, radix).getIntegerLegacy();
+                y = Formatter.toBigInt(cmd.argument, radix);
                 System.out.printf("y: %s\n", y);
                 break;
 
             case "m":
-                m = new BigInteger(cmd.argument, radix).getIntegerLegacy();
+                m = Formatter.toBigInt(cmd.argument, radix);
                 System.out.printf("m: %s\n", m);
                 break;
 
@@ -146,8 +146,8 @@ public class ProgramController {
             case "answ-d":
                 if (commandtype.equals("euclid")) {
                     io.print(euclid.euclid(x, y, radix), radix);
-                    a = euclid.getA();
-                    b = euclid.getB();
+                    a = euclid.getX();
+                    b = euclid.getY();
                 }
                 break;
         }

@@ -2,54 +2,70 @@ import java.util.*;
 
 class Euclid {
 
-    private List<Integer> a;
-    private List<Integer> b;
+    private List<Integer> x;
+    private List<Integer> y;
 
-    List<Integer> euclid(List<Integer> x, List<Integer> y, int base) {
+    /**
+     * Input: a, b element of Z
+     * Output: d, x, y elements of Z with d = gcd(a,b) = xa + yb
+     * Algorithm based on Benne de Weger Algorithmic Number Theory Algorithm 2.2
+     *
+     * @return d
+     */
+    List<Integer> euclid(List<Integer> a, List<Integer> b, int base) {
         Divider divider = new Divider();
         Adder adder = new Adder();
         Multiplier multiplier = new Multiplier();
 
-        a = new ArrayList<>();
-        b = new ArrayList<>();
-        List<Integer> aa;
-        List<Integer> bb;
-        List<Integer> a_ = new ArrayList<>();
-        List<Integer> b_ = new ArrayList<>();
-        List<Integer> q;
-        List<Integer> remainder;
+        // Copy so we can modify
+        List<Integer> aPrime = new ArrayList<>(a);
+        List<Integer> bPrime = new ArrayList<>(b);
 
-        a.add(1);
-        a.add(0);
-        a_.add(0);
-        a_.add(0);
-        b.add(0);
-        b.add(0);
-        b_.add(1);
-        b_.add(0);
+        // Take the absolute value
+        aPrime.set(aPrime.size() - 1, 0);
+        bPrime.set(bPrime.size() - 1, 0);
 
-        while (y.size() != 2 || y.get(0) != 0) {
-            q = divider.divide(x, y, base);
-            remainder = divider.getRem();
-            aa = a;
-            bb = b;
-            a = a_;
-            b = b_;
-            x = y;
-            y = remainder;
-            a_ = adder.sub(aa, multiplier.mul(a_, q, base), base);
-            b_ = adder.sub(bb, multiplier.mul(b_, q, base), base);
+        // Initialize x1, x2, y1, y2
+        List<Integer> x1 = Arrays.asList(1, 0);
+        List<Integer> x2 = Arrays.asList(0, 0);
+        List<Integer> y1 = Arrays.asList(0, 0);
+        List<Integer> y2 = Arrays.asList(1, 0);
+
+        // While bPrime > 0 (i.e. bPrime is positive and not zero)
+        while (bPrime.get(bPrime.size() - 1) == 0 && (bPrime.size() > 2 || bPrime.get(0) != 0)) {
+            // a' / b'
+            List<Integer> q = divider.divide(aPrime, bPrime, base);
+            List<Integer> r = divider.getRem();
+
+            aPrime = bPrime;
+            bPrime = r;
+
+            List<Integer> x3 = adder.sub(x1, multiplier.mul(q, x2, base), base);
+            List<Integer> y3 = adder.sub(y1, multiplier.mul(q, y2, base), base);
+            x1 = x2;
+            y1 = y2;
+            x2 = x3;
+            y2 = y3;
+
         }
 
+        List<Integer> d = aPrime;
+        x = x1;
+        y = y1;
+
+        // Copy the sign of original numbers
+        x.set(x.size() - 1, a.get(a.size() - 1));
+        y.set(y.size() - 1, b.get(b.size() - 1));
+
+        return d;
+    }
+
+    List<Integer> getX() {
         return x;
     }
 
-    List<Integer> getA() {
-        return a;
-    }
-
-    List<Integer> getB() {
-        return b;
+    List<Integer> getY() {
+        return y;
     }
 
 }

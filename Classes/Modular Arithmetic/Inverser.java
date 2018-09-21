@@ -8,7 +8,7 @@ class Inverser {
 
         temp = euclid.euclid(a, m, base);
         if (temp.size() == 2 && temp.get(0) == 1) {
-            return euclid.getA();
+            return euclid.getX();
         }
         return null;
     }

@@ -1,9 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class InputTest {
     Adder adder;
@@ -180,14 +181,14 @@ public class InputTest {
         assertEquals("9c1b2bab5c0ca148e260", str(ans));
     }
 
-    //@Test
+    @Test
     public void q() {
         radix = 16;
         x = bigint("5896363941d32eccd5c");
         y = bigint("c7eb8a91fbad0d1c1f03");
         d = euclid.euclid(x, y, radix);
-        a = euclid.getA();
-        b = euclid.getB();
+        a = euclid.getX();
+        b = euclid.getY();
         assertEquals("1", str(d));
         assertEquals("96998fcd4268440ce6a5", str(a));
         assertEquals("-42bb80ba0313b9aff19", str(b));
@@ -213,10 +214,10 @@ public class InputTest {
 
 
     private List<Integer> bigint(String s) {
-        return new BigInteger(s, radix).getInteger();
+        return Formatter.toBigInt(s, radix);
     }
 
     private String str(List<Integer> bigInt) {
-        return new BigInteger(bigInt, radix).toString();
+        return Formatter.toString(bigInt, radix);
     }
 }

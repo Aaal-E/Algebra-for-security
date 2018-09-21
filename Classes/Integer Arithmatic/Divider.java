@@ -2,26 +2,45 @@ import java.util.*;
 
 class Divider {
 
+    private List<Integer> q;
     private List<Integer> r;
+    private int countAdd;
+    private int countMul;
 
     /**
      * Calculate division with remainder for x divided by y. Returns the quotient, use getRem() to get the remainder.
-     * Algorithm from Victor Shoup section 3.3.4.
+     * Based on Benne de Weger Algorithmic Number Theory Algorithm 1.4.
+     * Assumes |a|>|b|
      */
     public List<Integer> divide(List<Integer> a, List<Integer> b, int base) {
+        // Reset variables
+        q = null;
+        r = null;
+        countAdd = 0;
+        countMul = 0;
+
         // Check for leading zeros to be sure
         if (hasLeadingZeros(a) || hasLeadingZeros(b)) {
             throw new IllegalArgumentException("leading zeros detected");
         }
+
+        // Take absolute value
+        List<Integer> aAbs = new ArrayList<>(a);
+        List<Integer> bAbs = new ArrayList<>(b);
+        aAbs.set(aAbs.size() - 1, 0);
+        bAbs.set(bAbs.size() - 1, 0);
+
+        // Division of nonnegative integers
+        divisionNonnegative(aAbs, bAbs, base);
+
+        /*
+
 
         // Split number and sign
         // xUnsigned/yUnsigned is the original number with the sign element removed
         // At index 0 is the least significant word
         List<Integer> aUnsigned = new ArrayList<>(a);
         List<Integer> bUnsigned = new ArrayList<>(b);
-        // xPositive/yPositive denotes the sign
-        boolean aPositive = aUnsigned.remove(aUnsigned.size() - 1) == 0;
-        boolean bPositive = bUnsigned.remove(bUnsigned.size() - 1) == 0;
 
         // If x < y, we have quotient = 0 and remainder = x
         if (lessThanUnsigned(a, b)) {
@@ -86,7 +105,14 @@ class Divider {
         q = q.subList(0, k - l + 1);
         r = r.subList(0, l);
 
-        // Add correct sign to quotient
+        */
+
+        // Find signs
+        boolean aPositive = a.remove(a.size() - 1) == 0;
+        boolean bPositive = b.remove(b.size() - 1) == 0;
+
+
+        // Fix sign of quotient
         if (aPositive == bPositive) {
             // Both numbers have the same sign, quotient is positive
             q.add(0);
@@ -95,7 +121,7 @@ class Divider {
             q.add(1);
         }
 
-        // Add correct sign to remainder
+        // Fix sign of remainder
         if (aPositive) {
             // a is positive, remainder is positive
             r.add(0);
@@ -117,6 +143,21 @@ class Divider {
 
     public List<Integer> getRem() {
         return r;
+    }
+
+    /**
+     * Does division on nonnegative integers.
+     */
+    private void divisionNonnegative(List<Integer> x, List<Integer> y, int b) {
+        // Checks to be sure of the assumptions
+        if (x.get(x.size() - 1) == 1 || y.get(y.size() - 1) == 1) {
+            throw new IllegalArgumentException("negative integer");
+        }
+        if (hasLeadingZeros(x) || hasLeadingZeros(y)) {
+            throw new IllegalArgumentException("integer has leading zeros");
+        }
+
+
     }
 
     /**

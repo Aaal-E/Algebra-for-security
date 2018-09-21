@@ -133,7 +133,7 @@ class Adder { //chooses whether to use addition or subtraction for addition
     List<Integer> add(List<Integer> x, List<Integer> y, List<Integer> m, int radix) {
         List<Integer> z = add(x, y, radix);
 
-        if (new BigInteger(z, radix).compareTo(new BigInteger(m, radix)) >= 0) {
+        if (BigInt.greaterOrEqual(z, m)) {
             // z >= m, do z = z - m
             z = sub(z, m, radix);
         }
@@ -147,7 +147,8 @@ class Adder { //chooses whether to use addition or subtraction for addition
     List<Integer> sub(List<Integer> x, List<Integer> y, List<Integer> m, int radix) {
         List<Integer> z = sub(x, y, radix);
 
-        if (new BigInteger(z, radix).compareTo(BigInteger.ZERO) < 0) {
+        if (BigInt.isNegative(z)) {
+            // z < 0, add m
             z = add(z, m, radix);
         }
 
