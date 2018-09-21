@@ -104,6 +104,14 @@ class Divider {
             r.add(1);
         }
 
+        // Correct for negative 0
+        if (q.equals(Arrays.asList(0, 1))) {
+            q = Arrays.asList(0, 0);
+        }
+        if (r.equals(Arrays.asList(0, 1))) {
+            r = Arrays.asList(0, 0);
+        }
+
         return q;
     }
 

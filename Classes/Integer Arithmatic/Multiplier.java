@@ -7,6 +7,10 @@ class Multiplier {
     Modulator mod = new Modulator();
 
     List<Integer> mul(List<Integer> x, List<Integer> y, int b) {
+        // Copy x and y since we'll modify them
+        x = new ArrayList<>(x);
+        y = new ArrayList<>(y);
+
 
         int m = x.size();
         int n = y.size();

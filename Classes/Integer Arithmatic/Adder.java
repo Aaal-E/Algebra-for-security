@@ -126,15 +126,31 @@ class Adder { //chooses whether to use addition or subtraction for addition
         return result;
     }
 
-    List<Integer> add(List<Integer> x, List<Integer> y, List<Integer> m, int b) {
-        x = mod.mod(x, m, b);
-        y = mod.mod(y, m, b);
-        return mod.mod(add(x, y, b), m, b);
+    /**
+     * For modular addition and subtraction we assume that the input is in reduced form!
+     * I.e. for input n and modulo m we assume 0 <= n < m.
+     */
+    List<Integer> add(List<Integer> x, List<Integer> y, List<Integer> m, int radix) {
+        List<Integer> z = add(x, y, radix);
+
+        if (new BigInteger(z, radix).compareTo(new BigInteger(m, radix)) >= 0) {
+            // z >= m, do z = z - m
+            z = sub(z, m, radix);
+        }
+
+        return z;
     }
 
-    List<Integer> sub(List<Integer> x, List<Integer> y, List<Integer> m, int b) {
-        x = mod.mod(x, m, b);
-        y = mod.mod(y, m, b);
-        return mod.mod(add(x, y, b), m, b);
+    /**
+     * See add(x,y,m,radix).
+     */
+    List<Integer> sub(List<Integer> x, List<Integer> y, List<Integer> m, int radix) {
+        List<Integer> z = sub(x, y, radix);
+
+        if (new BigInteger(z, radix).compareTo(BigInteger.ZERO) < 0) {
+            z = add(z, m, radix);
+        }
+
+        return z;
     }
 }

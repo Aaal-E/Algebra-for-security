@@ -68,23 +68,23 @@ public class IO {
         return new Command(command, argument);
     }
 
-    //print a line using the printer
-    public void print(String str) {
+    /**
+     * Print a string with a linebreak at the end.
+     */
+    void print(String str) {
         writer.println(str);
     }
 
-    //print a number in a given base
+    /**
+     * Prints a number with a linebreak at the end.
+     */
     void print(List<Integer> number, int base) {
         print(toString(number, base));
     }
 
-
-    //print a number in a given base with added prefix
-    void print(String str, List<Integer> number, int base) {
-        str = str + toString(number, base);
-        print(str);
-    }
-
+    /**
+     * Prints a long with a linebreak at the end.
+     */
     void print(long l) {
         print(Long.toString(l));
     }
@@ -92,31 +92,8 @@ public class IO {
     /**
      * Returns a string representation using given radix.
      */
-    public static String toString(List<Integer> n, int radix) {
-        BigInteger bigint = new BigInteger(n, radix);
-        StringBuilder result = new StringBuilder();
-        if (bigint.isNegative()) {
-            result.append('-');
-        }
-        boolean leadingZeros = true;
-        for (int i = bigint.getIntegerLegacy().size() - 2; i >= 0; i--) {
-            int number = bigint.getIntegerLegacy().get(i);
-            if (leadingZeros && number == 0 && i != 0) {
-                // Skip leading zero
-            } else if (leadingZeros && number != 0) {
-                // Passed all leading zeros, so disable leadingZeros flag
-                leadingZeros = false;
-                result.append(Integer.toString(number, radix));
-            } else {
-                // Print the rest of the numbers
-                result.append(Integer.toString(number, radix));
-            }
-        }
-        System.out.println(n);
-        System.out.println(result.toString());
-        System.out.println(radix);
-
-        return result.toString();
+    private static String toString(List<Integer> n, int radix) {
+        return new BigInteger(n, radix).toString();
     }
 
 }

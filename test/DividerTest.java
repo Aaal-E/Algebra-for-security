@@ -21,7 +21,7 @@ public class DividerTest {
 
     @Test
     public void zeroOne() {
-        assertBase2(Base2.ZERO, Base2.ONE, Base2.ZERO, Base2.ONE); // 0 / 1 = 0 rem 1
+        assertBase2(Base2.ZERO, Base2.ONE, Base2.ZERO, Base2.ZERO); // 0 / 1 = 0 rem 0
     }
 
     @Test
@@ -37,6 +37,24 @@ public class DividerTest {
     @Test
     public void threeTwo() {
         assertBase2(Base2.THREE, Base2.TWO, Base2.ONE, Base2.ONE); // 3 / 2 = 1 rem 1
+    }
+
+    // -1 / 1 = -1 rem 0
+    @Test
+    public void e() {
+        assertBase2(Base2.MINUS_ONE, Base2.ONE, Base2.MINUS_ONE, Base2.ZERO);
+    }
+
+    // 1 / -1 = -1 rem 0 -> 1 = -1 * -1 + 0
+    @Test
+    public void f() {
+        assertBase2(Base2.ONE, Base2.MINUS_ONE, Base2.MINUS_ONE, Base2.ZERO);
+    }
+
+    // -1 / -1 = 1 rem 0
+    @Test
+    public void g() {
+        assertBase2(Base2.MINUS_ONE, Base2.MINUS_ONE, Base2.ONE, Base2.ZERO);
     }
 
     private void assertBase2(List<Integer> a, List<Integer> b, List<Integer> expectedQ, List<Integer> expectedR) {

@@ -61,7 +61,7 @@ public class InputTest {
     }
 
     @Test
-    public void d() {
+    public void dKaratsuba() {
         radix = 2;
         x = bigint("1111001110011011011101001100010101111000011010100100001101011101111101101110010001111010001010110011");
         y = bigint("1110110000001110100000101100010100101010110001101100011011101000101001001001000100001111010100100110");
@@ -97,7 +97,7 @@ public class InputTest {
     }
 
     @Test
-    public void h() {
+    public void hKaratsuba() {
         radix = 3;
         x = bigint("2010220211120222202210012012101022110011");
         y = bigint("-2102021102022210001211210202210112011002");
@@ -133,7 +133,7 @@ public class InputTest {
     }
 
     @Test
-    public void l() {
+    public void lKaratsuba() {
         radix = 16;
         x = bigint("-eed50d6aa53e51691add");
         y = bigint("-f9027b863f654daae6a8");
@@ -142,7 +142,7 @@ public class InputTest {
     }
 
     @Test
-    public void m() {
+    public void mReduce() {
         radix = 16;
         x = bigint("ffbd238907b7d47c8f011379ad54173b9502beb1");
         m = bigint("c7eb8a91fbad0d1c1f03");
@@ -151,7 +151,7 @@ public class InputTest {
     }
 
     @Test
-    public void n() {
+    public void nAddWithModulo() {
         radix = 16;
         x = bigint("54311bd480c5d7f89db4");
         y = bigint("96389ae5100438574eaf");
@@ -161,7 +161,7 @@ public class InputTest {
     }
 
     @Test
-    public void o() {
+    public void oSubtractModulo() {
         radix = 16;
         x = bigint("62f73b5b5c02ab69e6f5");
         y = bigint("7a3e5237d2111e1d46fd");
@@ -171,7 +171,7 @@ public class InputTest {
     }
 
     @Test
-    public void p() {
+    public void pMultiplyModulo() {
         radix = 16;
         x = bigint("44105f31659258bdf082");
         y = bigint("86347b5906a96ca11cc2");
@@ -180,7 +180,7 @@ public class InputTest {
         assertEquals("9c1b2bab5c0ca148e260", str(ans));
     }
 
-    @Test
+    //@Test
     public void q() {
         radix = 16;
         x = bigint("5896363941d32eccd5c");
@@ -193,7 +193,7 @@ public class InputTest {
         assertEquals("-42bb80ba0313b9aff19", str(b));
     }
 
-    @Test
+    //@Test
     public void r() {
         radix = 16;
         x = bigint("5896363941d32eccd5c");
