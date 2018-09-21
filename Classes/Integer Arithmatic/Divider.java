@@ -2,65 +2,135 @@ import java.util.*;
 
 class Divider {
 
-    ArrayList<Integer> r = new ArrayList<Integer>(); //initialize the remainder
+    private List<Integer> r;
 
-    ArrayList<Integer> divide(ArrayList<Integer> x, ArrayList<Integer> y, int b) {
-        int m = x.size(); //k
-        int n = y.size(); //l
+    /**
+     * Calculate division with remainder for x divided by y. Returns the quotient, use getRem() to get the remainder.
+     * Algorithm from Victor Shoup section 3.3.4.
+     */
+    public List<Integer> divide(List<Integer> a, List<Integer> b, int base) {
+        // Check for leading zeros to be sure
+        if (hasLeadingZeros(a) || hasLeadingZeros(b)) {
+            throw new IllegalArgumentException("leading zeros detected");
+        }
 
-        ArrayList<Integer> q = new ArrayList<Integer>();
-        int k = r.size();  //q has m digits, here = k
-        int carry, t;
+        // Split number and sign
+        // xUnsigned/yUnsigned is the original number with the sign element removed
+        // At index 0 is the least significant word
+        List<Integer> aUnsigned = new ArrayList<>(a);
+        List<Integer> bUnsigned = new ArrayList<>(b);
+        // xPositive/yPositive denotes the sign
+        boolean aPositive = aUnsigned.remove(aUnsigned.size() - 1) == 0;
+        boolean bPositive = bUnsigned.remove(bUnsigned.size() - 1) == 0;
 
-        for (int i = 0; i < m; i++)
-            r.set(i, x.get(i));
+        // If x < y, we have quotient = 0 and remainder = x
+        if (lessThanUnsigned(a, b)) {
+            r = a;
+            // Return positive 0
+            return Arrays.asList(0, 0);
+        }
 
-        r.set(m, 0);
+        int k = aUnsigned.size();
+        int l = bUnsigned.size();
 
-        for (int i = m - n; i >= 0; i--) {
-            q.set(i, Math.floorDiv(r.get(i + n) * b + r.get(i + n - 1), y.get(n - 1)));
+        // The quotient will have at most m digits in current base
+        int m = k - l + 1;
 
-            if (q.get(i) >= b)
-                q.set(i, b - 1); //if it overflows
+        // Initialize quotient to an array of length m
+        List<Integer> q = new ArrayList<>(m);
+        // Fill with zeroes
+        q.addAll(Collections.nCopies(m, 0));
 
-            carry = 0;
+        // Fill remainder with a and add leading zero
+        r = new ArrayList<>(aUnsigned);
+        r.add(0);
 
-            for (int j = 0; j < n; j++) {
-                t = r.get(i + j) - q.get(i) * y.get(j) + carry;
+        for (int i = k - l; i >= 0; i--) {
 
-                carry = Math.floorDiv(t, b);
+            int lhs = r.get(i + l) * base + r.get(i + l - 1);
+            int rhs = b.get(l - 1);
+            q.set(i, lhs / rhs);
 
-                r.set(i + j, b);
+            if (q.get(i) >= base) {
+                // Overflow
+                q.set(i, base - 1);
             }
-            r.set(i + n, r.get(i + n) + carry);
 
-            while (r.get(i + n) < 0) {
+            int carry = 0;
+
+            for (int j = 0; j <= l - 1; j++) {
+                int tmp = r.get(i + j) - q.get(i) * b.get(j) + carry;
+
+                // Qoutient
+                carry = tmp / base;
+                // Remainder
+                r.set(i + j, tmp % base);
+            }
+            r.set(i + l, r.get(i + l) + carry);
+
+            while (r.get(i + l) < 0) {
                 carry = 0;
-                for (int j = 0; j < n; j++) {
-                    t = r.get(i + j) + y.get(j) + carry;
+                for (int j = 0; j <= l - 1; j++) {
+                    int tmp = r.get(i + j) + b.get(i) + carry;
 
-                    carry = Math.floorDiv(t, b);
-
-                    r.set(i + j, t - carry * b); // second argument = t % b.
+                    // Quotient
+                    carry = tmp / base;
+                    // Remainder
+                    r.set(i + j, tmp % base);
                 }
-                r.set(i + n, r.get(i + n) + carry);
-
+                r.set(i + l, r.get(i + l) + carry);
                 q.set(i, q.get(i) - 1);
             }
         }
 
-        if (x.get(m) == 1 || y.get(n) == 1)
-            q.set(m - n + 1, 1);
-        else
-            q.set(m - n + 1, 0);
+        // Add correct sign to quotient
+        if (aPositive == bPositive) {
+            // Both numbers have the same sign, quotient is positive
+            q.add(0);
+        } else {
+            // Sign differs, quotient is negative
+            q.add(1);
+        }
 
-        r.set(n, 0); //r is always positive, right?
+        // Add correct sign to remainder
+        if (aPositive) {
+            // a is positive, remainder is positive
+            r.add(0);
+        } else {
+            // a is negative, remainder is negative
+            r.add(1);
+        }
 
         return q;
     }
 
-    ArrayList<Integer> getRem() {
-
+    public List<Integer> getRem() {
         return r;
+    }
+
+    /**
+     * Compares two integers and returns x < y. Assumes a list without a sign element. Assumes no leading zeros.
+     */
+    private boolean lessThanUnsigned(List<Integer> x, List<Integer> y) {
+        if (x.size() != y.size()) {
+            // Length differs
+            return x.size() < y.size();
+        }
+        // Length is the same, compare all words
+        for (int i = x.size() - 1; i >= 0; i--) {
+            if (!x.get(i).equals(y.get(i))) {
+                return x.get(i) < y.get(i);
+            }
+        }
+        // x equals y
+        return false;
+    }
+
+    /**
+     * Returns if the signed big integer has leading zeros.
+     */
+    private boolean hasLeadingZeros(List<Integer> n) {
+        // Check if second to last is zero
+        return n.size() > 2 && n.get(n.size() - 2) == 0;
     }
 }

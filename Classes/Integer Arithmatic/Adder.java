@@ -3,29 +3,25 @@ import java.util.*;
 class Adder { //chooses whether to use addition or subtraction for addition
     Modulator mod = new Modulator();
 
-    ArrayList<Integer> add(ArrayList<Integer> x, ArrayList<Integer> y, int b) {
-        //TODO: fix 0+0
-    	
-    	if (/*first bit is zero and length is 2 for x*/) {
-    		return result = y
-    	}
-    	if (/*first bit is zero and length is 2 for y*/) {
-    		return result = x
-    	}
-
-        // Reverse the lists since they were originally assumed to be the other way around
+    List<Integer> add(List<Integer> x, List<Integer> y, int b) {
+        // Copy original inputs since we are going to change it
+        x = new ArrayList<>(x);
+        y = new ArrayList<>(y);
+        // Reverse the lists since they were originally assumed to be the other way around, with sign element at the back
         Collections.reverse(x);
         Collections.reverse(y);
+        x.add(x.remove(0));
+        y.add(y.remove(0));
 
 
 
         int x_end = x.size() - 1; //last index of x
         int y_end = y.size() - 1; //last index of y
 
-        boolean x_pos = x.get(0) == 0; //check whether x is negative
-        x.remove(0);
-        boolean y_pos = y.get(0) == 0; //check whether y is negative
-        y.remove(0);
+        boolean x_pos = x.get(x_end) == 0; //check whether x is negative
+        x.remove(x_end);
+        boolean y_pos = y.get(y_end) == 0; //check whether y is negative
+        y.remove(y_end);
 
         while (x.size() < y.size()) { //makes x as large as y if x is smaller
             x.add(0, 0);
@@ -34,7 +30,7 @@ class Adder { //chooses whether to use addition or subtraction for addition
             y.add(0, 0);
         }
 
-        ArrayList<Integer> result;
+        List<Integer> result;
         if (x_pos && y_pos) { // case 1: both x and y are positive
             result = do_add(x, y, b);
             result.add(0);
@@ -46,7 +42,7 @@ class Adder { //chooses whether to use addition or subtraction for addition
         } else {
             result = do_sub(y, x, b);    //case 4: x is negative and y is positive
         }
-        while (result.get(0) == 0) { //remove the insignificant zeroes from the result
+        while (result.size() > 2 && result.get(0) == 0) { //remove the insignificant zeroes from the result
             result.remove(0);
         }
 
@@ -58,17 +54,21 @@ class Adder { //chooses whether to use addition or subtraction for addition
     }
 
 
-    ArrayList<Integer> sub(ArrayList<Integer> x, ArrayList<Integer> y, int b) {//chooses whether to use addition or subtraction for subtraction
+    List<Integer> sub(List<Integer> x, List<Integer> y, int b) {//chooses whether to use addition or subtraction for subtraction
+        // Copy original inputs since we are going to change it
+        x = new ArrayList<>(x);
+        y = new ArrayList<>(y);
+
         // Reverse the lists since they were originally assumed to be the other way around
         Collections.reverse(x);
         Collections.reverse(y);
 
-        if (/*first bit is zero and length is 2 for x*/) {
-    		return result = null
-    	}
-    	if (/*first bit is zero and length is 2 for y*/) {
-    		return result = null
-    	}
+//        if (/*first bit is zero and length is 2 for x*/) {
+//    		return result = null
+//    	}
+//    	if (/*first bit is zero and length is 2 for y*/) {
+//    		return result = null
+//    	}
         
         int x_end = x.size() - 1; //last index of x
         int y_end = y.size() - 1; //last index of y
@@ -85,7 +85,7 @@ class Adder { //chooses whether to use addition or subtraction for addition
             y.add(0, 0);
         }
 
-        ArrayList<Integer> result;
+        List<Integer> result;
         if (x_pos && y_pos) { // case 1: both x and y are positive
             result = do_sub(x, y, b);
         } else if (!x_pos && !y_pos) { //case 2: both x and y are negative
@@ -108,7 +108,7 @@ class Adder { //chooses whether to use addition or subtraction for addition
         return result;
     }
 
-    ArrayList<Integer> do_add(ArrayList<Integer> x, ArrayList<Integer> y, int b) { // does addition
+    List<Integer> do_add(List<Integer> x, List<Integer> y, int b) { // does addition
         int length = x.size() - 1;
         int carry = 0;
         ArrayList<Integer> result = new ArrayList<>();
@@ -131,10 +131,10 @@ class Adder { //chooses whether to use addition or subtraction for addition
         return result;
     }
 
-    ArrayList<Integer> do_sub(ArrayList<Integer> x, ArrayList<Integer> y, int b) { //does subtraction
+    List<Integer> do_sub(List<Integer> x, List<Integer> y, int b) { //does subtraction
         int length = x.size() - 1;
         int carry = 0;
-        ArrayList<Integer> result = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         boolean swap = false;
 
         for (int i = 0; i <= length; i++) { // checks whether swapping is necessary, depending on which number is the biggest
@@ -146,7 +146,7 @@ class Adder { //chooses whether to use addition or subtraction for addition
             }
         }
         if (swap) {
-            ArrayList<Integer> temp = y;
+            List<Integer> temp = y;
             y = x;
             x = temp;
         }
@@ -171,13 +171,13 @@ class Adder { //chooses whether to use addition or subtraction for addition
         return result;
     }
 
-    ArrayList<Integer> add(ArrayList<Integer> x, ArrayList<Integer> y, ArrayList<Integer> m, int b) {
+    List<Integer> add(List<Integer> x, List<Integer> y, List<Integer> m, int b) {
         x = mod.mod(x, m, b);
         y = mod.mod(y, m, b);
         return mod.mod(add(x, y, b), m, b);
     }
 
-    ArrayList<Integer> sub(ArrayList<Integer> x, ArrayList<Integer> y, ArrayList<Integer> m, int b) {
+    List<Integer> sub(List<Integer> x, List<Integer> y, List<Integer> m, int b) {
         x = mod.mod(x, m, b);
         y = mod.mod(y, m, b);
         return mod.mod(add(x, y, b), m, b);

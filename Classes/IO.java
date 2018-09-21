@@ -74,13 +74,13 @@ public class IO {
     }
 
     //print a number in a given base
-    void print(ArrayList<Integer> number, int base) {
+    void print(List<Integer> number, int base) {
         print(toString(number, base));
     }
 
 
     //print a number in a given base with added prefix
-    void print(String str, ArrayList<Integer> number, int base) {
+    void print(String str, List<Integer> number, int base) {
         str = str + toString(number, base);
         print(str);
     }
@@ -92,15 +92,30 @@ public class IO {
     /**
      * Returns a string representation using given radix.
      */
-    public static String toString(ArrayList<Integer> n, int radix) {
+    public static String toString(List<Integer> n, int radix) {
         BigInteger bigint = new BigInteger(n, radix);
         StringBuilder result = new StringBuilder();
         if (bigint.isNegative()) {
             result.append('-');
         }
+        boolean leadingZeros = true;
         for (int i = bigint.getIntegerLegacy().size() - 2; i >= 0; i--) {
-            result.append(Integer.toString(bigint.getIntegerLegacy().get(i), radix));
+            int number = bigint.getIntegerLegacy().get(i);
+            if (leadingZeros && number == 0 && i != 0) {
+                // Skip leading zero
+            } else if (leadingZeros && number != 0) {
+                // Passed all leading zeros, so disable leadingZeros flag
+                leadingZeros = false;
+                result.append(Integer.toString(number, radix));
+            } else {
+                // Print the rest of the numbers
+                result.append(Integer.toString(number, radix));
+            }
         }
+        System.out.println(n);
+        System.out.println(result.toString());
+        System.out.println(radix);
+
         return result.toString();
     }
 

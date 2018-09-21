@@ -6,7 +6,7 @@ class Karatsuba {
 		
 		
 
-		ArrayList<Integer> result  = (a * (B^2m)) + (b * (B^m)) + c
+//		ArrayList<Integer> result  = (a * (B^2m)) + (b * (B^m)) + c
 		
 		return null;
 	}
