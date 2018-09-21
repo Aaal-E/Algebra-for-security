@@ -14,7 +14,6 @@ class Adder { //chooses whether to use addition or subtraction for addition
         y.add(y.remove(0));
 
 
-
         int x_end = x.size() - 1; //last index of x
         int y_end = y.size() - 1; //last index of y
 
@@ -54,58 +53,14 @@ class Adder { //chooses whether to use addition or subtraction for addition
     }
 
 
-    List<Integer> sub(List<Integer> x, List<Integer> y, int b) {//chooses whether to use addition or subtraction for subtraction
-        // Copy original inputs since we are going to change it
-        x = new ArrayList<>(x);
-        y = new ArrayList<>(y);
+    List<Integer> sub(List<Integer> x, List<Integer> y, int radix) {//chooses whether to use addition or subtraction for subtraction
+        // Reverse the sign of y
+        int ySign = y.get(y.size() - 1);
+        List<Integer> yInversed = new ArrayList<>(y);
+        yInversed.set(y.size() - 1, 1 - ySign);
 
-        // Reverse the lists since they were originally assumed to be the other way around
-        Collections.reverse(x);
-        Collections.reverse(y);
-
-//        if (/*first bit is zero and length is 2 for x*/) {
-//    		return result = null
-//    	}
-//    	if (/*first bit is zero and length is 2 for y*/) {
-//    		return result = null
-//    	}
-        
-        int x_end = x.size() - 1; //last index of x
-        int y_end = y.size() - 1; //last index of y
-
-        boolean x_pos = x.get(0) == 0; //check whether x is negative
-        x.remove(0);
-        boolean y_pos = y.get(0) == 0; //check whether y is negative
-        y.remove(0);
-
-        while (x.size() < y.size()) {
-            x.add(0, 0);
-        }
-        while (y.size() < x.size()) {
-            y.add(0, 0);
-        }
-
-        List<Integer> result;
-        if (x_pos && y_pos) { // case 1: both x and y are positive
-            result = do_sub(x, y, b);
-        } else if (!x_pos && !y_pos) { //case 2: both x and y are negative
-            result = do_sub(y, x, b);
-        } else if (x_pos && !y_pos) { // case 3: x is positive and y is negative
-            result = do_add(x, y, b);
-            result.add(0);
-        } else { //case 4: x is negative and y is positive
-            result = do_add(x, y, b);
-            result.add(1);
-        }
-        while (result.get(0) == 0) { //remove the insignificant zeroes from the result
-            result.remove(0);
-        }
-
-        // Reverse back to new representation
-        Collections.reverse(result);
-        result.add(result.remove(0));
-
-        return result;
+        // Do addition with x + (-y)
+        return add(x, yInversed, radix);
     }
 
     List<Integer> do_add(List<Integer> x, List<Integer> y, int b) { // does addition
