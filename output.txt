@@ -1,0 +1,67 @@
+[radix] 8
+[add]
+[x] 3
+[y] -7
+[answer] -4
+
+[radix] 10
+[subtract]
+[x] 5
+[y] 6
+[answer] -1
+
+[radix] 10
+[multiply]
+[x] -2
+[y] 100
+[answer] -200
+
+[radix] 16
+[karatsuba]
+[x] ff
+[y] 2
+[answer] 1fe
+[count-add] 12
+[count-mul] 4
+
+[radix] 2
+[reduce]
+[x] 11
+[m] 10
+[answer] 1
+
+[radix] 10
+[inverse]
+[x] 5
+[m] 6
+[answer] -1
+
+[radix] 10
+[euclid]
+[x] 95
+[y] 90
+[answ-d] 5
+[answ-a] 1
+[answ-b] -1
+
+[radix] 36
+[add]
+[x] y
+[y] x
+[m] 10
+[answer] v
+
+[radix] 10
+[subtract]
+[x] 1
+[y] 3
+[m] 2
+[answer] 0
+
+[radix] 10
+[multiply]
+[x] 2
+[y] 4
+[m] 6
+[answer] 2
+

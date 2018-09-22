@@ -4,7 +4,7 @@
 *.class
 
 # Output file
-output.txt
+#output.txt
 
 # IntelliJ
 *.iml
