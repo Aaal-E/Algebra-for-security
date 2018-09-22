@@ -15,7 +15,6 @@ class Divider {
     /**
      * Calculate division with remainder for x divided by y. Returns the quotient, use getRem() to get the remainder.
      * Based on Benne de Weger Algorithmic Number Theory Algorithm 1.4.
-
      */
     public List<Integer> divide(List<Integer> a, List<Integer> b, int radix) {
         // Reset variables

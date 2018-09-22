@@ -56,6 +56,27 @@ Optionally an abstract.
 
 % Describe what your approach is: how you represent various objects, how users should input polynomials, etc. Show, by including, for example, screenshots of your program at work, that your set-up works.
 
+\paragraph{How to run}
+
+We provide a compiled jar file which should be runnable from the command prompt.
+It should be run in the same folder as where \texttt{input.txt} is located.
+It writes the result to \texttt{output.txt}.
+
+The command is: \texttt{java -jar reinventingthewheel1.jar}
+
+
+\paragraph{From source}
+
+To build and run from the source java files, in the top directory run:
+
+\begin{itemize}
+\item \texttt{javac -cp "Classes/:Classes/Integer Arithmatic/:Classes/Modular Arithmetic/" Classes/ProgramController.java}
+\item \texttt{java -cp "Classes/:Classes/Integer Arithmatic/:Classes/Modular Arithmetic/" ProgramController}
+\end{itemize}
+
+
+
+
 
 \subsection{Run examples}
 
@@ -73,7 +94,6 @@ If the value at index $n$ is 0, the sign is positive, if the value is $1$, the s
 As an example, if the input is $-345$, the resulting array is $\{5, 4, 3, 1\}$.
 For the input $123$ the resulting array is $\{3, 2, 1, 0\}$.
 
-Book \cite{ant}.
 
 \section{Integer arithmetic}
 
@@ -130,6 +150,7 @@ For cases where $|x|<|y|$ the implementation of the algorithm gives some practic
 In these cases the answer is trivially $q=0$ and $r=x$.
 Therefore before running the algorithm we check for this special case and return appropriately.
 
+
 \subsection{Euclid’s Extended Algorithm}
 
 
@@ -140,6 +161,8 @@ Therefore before running the algorithm we check for this special case and return
 \subsection{Addition, subtraction}
 
 \subsection{Multiplication}
+
+\cite{shoup}.
 
 \subsection{Modular inversion for a large modulus m}
 
@@ -156,13 +179,16 @@ Therefore before running the algorithm we check for this special case and return
 
 \section{Contributions}
 
-\paragraph{Code}
+Alex and Maarten worked on EEA, Division, Program Controller, Formatter and the rest of the auxiliary classes.
 
-Tim and Alex.
+Adrian worked on Multiplication and Division.
 
-\paragraph{Documentation}
+Tim had to implement addition and subtraction and had a look at Karatsuba.
 
-Maarten.
+Anastasiia took care of the report, with the help of Maarten and Adrian.  
+
+
+
 
 
 \begin{thebibliography}{9}
@@ -174,6 +200,10 @@ Maarten.
   Part 1 - Algorithmic Number Theory,
   version 0.65,
   December 15, 2017
+
+\bibitem{shoup}
+Shoup, Victor. A computational introduction to number theory and algebra. Cambridge university press, 2009.
+
 
 \end{thebibliography}
 

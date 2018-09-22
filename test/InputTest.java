@@ -189,6 +189,7 @@ public class InputTest {
         d = euclid.euclid(x, y, radix);
         a = euclid.getX();
         b = euclid.getY();
+        System.out.printf("d=%s, a=%s, b=%s\n", str(d), str(a), str(b));
         assertEquals("1", str(d));
         assertEquals("96998fcd4268440ce6a5", str(a));
         assertEquals("-42bb80ba0313b9aff19", str(b));
