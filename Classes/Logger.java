@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class Logger {
@@ -6,6 +8,11 @@ class Logger {
      * Set log level here.
      */
     private final static int LEVEL = 9; // 0 (nothing) <= LEVEL <= 9 (everything)
+
+    /**
+     * Ignore certain loggers.
+     */
+    private final static String[] TO_IGNORE = {};
 
     private final String name;
 
@@ -39,6 +46,9 @@ class Logger {
     }
 
     private void write(String msg) {
+        if (Arrays.asList(TO_IGNORE).contains(name)) {
+            return;
+        }
         System.out.printf("[%s] %s\n", name, msg);
     }
 

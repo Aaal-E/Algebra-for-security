@@ -57,6 +57,16 @@ public class DividerTest {
         assertBase2(Base2.MINUS_ONE, Base2.MINUS_ONE, Base2.ONE, Base2.ZERO);
     }
 
+    @Test
+    public void h() {
+        List<Integer> a = Formatter.toBigInt("5896363941d32eccd5c", 16);
+        List<Integer> b = Formatter.toBigInt("c7eb8a91fbad0d1c1f03", 16);
+        List<Integer> q = divider.divide(a, b, 16);
+        List<Integer> r = divider.getRem();
+        assertEquals(BigInt.ZERO, q);
+        assertEquals(Formatter.toBigInt("5896363941d32eccd5c", 16), r);
+    }
+
     private void assertBase2(List<Integer> a, List<Integer> b, List<Integer> expectedQ, List<Integer> expectedR) {
         List<Integer> q = divider.divide(a, b, 2);
         List<Integer> r = divider.getRem();

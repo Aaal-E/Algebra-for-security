@@ -123,17 +123,25 @@ Step 3: remove leading zeros.
 For quotient $q$ we have: $q$ is positive $\iff$ ($x$ and $y$ are positive $\lor$ $x$ and $y$ are negative).
 
 For remainder $r$ we have: $r$ is positive $\iff$ $x$ is positive.
-\substaction{Euclid’s Extended Algorithm}
+
+\paragraph{Special case $|x|<|y|$}
+
+For cases where $|x|<|y|$ the implementation of the algorithm gives some practical problems because $k$ can become negative.
+In these cases the answer is trivially $q=0$ and $r=x$.
+Therefore before running the algorithm we check for this special case and return appropriately.
+
+\subsection{Euclid’s Extended Algorithm}
 
 
 \section{Modular arithmetic}
 
-\substaction{Modular reduction}
+\subsection{Modular reduction}
 
-\substaction{Addition, subtraction}
-\substaction{Multiplication}
+\subsection{Addition, subtraction}
 
-\substraction{Modular inversion for a large modulus m}
+\subsection{Multiplication}
+
+\subsection{Modular inversion for a large modulus m}
 
 \section{Discussion}
 

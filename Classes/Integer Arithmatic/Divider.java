@@ -15,7 +15,7 @@ class Divider {
     /**
      * Calculate division with remainder for x divided by y. Returns the quotient, use getRem() to get the remainder.
      * Based on Benne de Weger Algorithmic Number Theory Algorithm 1.4.
-     * Assumes |a|>|b|
+
      */
     public List<Integer> divide(List<Integer> a, List<Integer> b, int radix) {
         // Reset variables
@@ -31,6 +31,13 @@ class Divider {
         // Take absolute value
         aAbs.set(aAbs.size() - 1, 0);
         bAbs.set(bAbs.size() - 1, 0);
+
+        // The algorithm (Algorithm 1.4) works for |a|>=|b|, for |a|<|b| the result is q=0, r=a
+        if (BigInt.lessThan(aAbs, bAbs)) {
+            q = BigInt.ZERO;
+            r = new ArrayList<>(a); // Make a copy for safety of reference
+            return q;
+        }
 
         // Division of nonnegative integers
         divisionNonnegative(aAbs, bAbs, radix);
@@ -68,7 +75,6 @@ class Divider {
     private void divisionNonnegative(List<Integer> x, List<Integer> y, int b) {
 
         LOG.infof("divisionNonnegative(x = %s, y = %s, b = %s)", x, y, b);
-
 
         // Checks to be sure of the assumptions
         if (BigInt.isNegative(x) || BigInt.isNegative(y)) {
