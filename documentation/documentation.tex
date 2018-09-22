@@ -1,4 +1,27 @@
 \documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx, dsfont, amsthm, amsmath, lipsum, fancyhdr, hyperref,parskip, mleftright}
+\usepackage{amsmath, breqn}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{pgf,tikz}
+\usepackage{mathrsfs}
+\usepackage[super,negative]{nth}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{blindtext}
+
+\usetikzlibrary{arrows}
+\pagestyle {fancy}
+
+\newcommand\floor[1]{ \lfloor#1\rfloor }
+\newcommand\ceil[1]{ \lceil#1\rceil }
+\newcommand{\setfromone}[1]{\left\{1,\ldots,{#1}\right\}}
+\newcommand{\setfromzero}[1]{\left\{0,\ldots,{#1}-1\right\}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
 
 \usepackage{hyperref}
 
