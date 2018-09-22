@@ -6,11 +6,11 @@
 
 \title{Assignment 2WF90, Integer Arithmetic, September 2018}
 \author{
-    Tim With A Lastname\\
-    \texttt{0123456}
+    Tim Hoekstra\\
+    \texttt{0997503}
     \and
-    Alex With A Lastname\\
-    \texttt{0123456}
+    Alex Thieme\\
+    \texttt{1227587}
     \and
     Anastasiia Bilonizhko\\
     \texttt{1393456}
@@ -64,7 +64,14 @@ We provide a compiled jar file which should be runnable from the command prompt.
 It should be run in the same folder as where \texttt{input.txt} is located.
 It writes the result to \texttt{output.txt}.
 
-% TODO: change jar name
+Firstly, one should navigate in the command prompt to the folder where the jar file is stored. One can do so using the commands "cd", then pressing "Tab" in order to navigate through the files and folders that are in the currently accessed folder. 
+
+\includegraphics[width = 14 cm, height = 8 cm]{run1v1.PNG}
+
+Secondly, one should be aware that the input file already contains the row [answer], since that is the provided template. 
+
+By changing the input file according to the desired operations, the output file changes accordingly after executing the jar file again. 
+
 The command is: \texttt{java -jar group35.jar}.
 To have intermediate values from algorithms printed in the console, run the command with:
 \texttt{java -jar group35.jar verbose}.
@@ -190,10 +197,22 @@ Addition of two negative numbers is equivalent to addition of two positive numbe
 This check is performed first in the function \texttt{add()}.
 After checking, the \texttt{do\_add} or \texttt{do\_sub} function is ran.
 
+Addition : Given how we store long numbers (see Multiplication), we firstly reverse the numbers, only after having copied them in new arrays. 
+
+Then we check which numbers are positive or negative and make the  one with less digits have the same length as the one with more digits by adding trailing zeros. 
+
+Afterwards, we treat four cases: if both numbers are positive, if both are negative, if the first one is positive and the other is negative, and if the second one is positive and the other one is negative. Then we remove trailing zeros from the result and reverse it in order to get back to the initial representation for long numbers.
+
+Subtraction: We firstly choose whether we perform "addition"  or "subtraction", then carrying it out by taking into account the carry. 
+
+As a side note, for modular addition and subtraction, we assume the input is in "reduced form", i.e that $n (mod m)$ implies that $0 \leq n < m.$
+
+
 \subsection{Multiplication}
 
+We firstly copy the numbers in auxiliary arrays. Then, since the way we store any long number is by adding a bit sign and then reversing the number, we account for whether one or both numbers are negative and then remove the bit sign. 
 
-
+Then we perform the naive multiplication algorithm \cite{shoup} by taking into account the carry and storing in a new array. While doing so, we count the number of elementary additions and multiplications. Afterwards, we add the bit sign at the end of the result according to these observations. Firstly, if both numbers were negative or positive, the result is positive. Secondly, if only one of the numbers is negative, then the result is positive. 
 
 \subsection{Multiplication by the method of Karatsuba}
 
@@ -250,15 +269,19 @@ Therefore before running the algorithm we check for this special case and return
 
 \subsection{Modular inversion for a large modulus m}
 
-\section{Discussion}
+\section{Discussion and Limitations}
 
 % Present some examples of different word sizes and radices, and compare elementary operation counts of primary school and Karatsuba methods. Draw a conclusion based on the theory.
 
+The program offers the possibility to do operations such as addition, subtraction, division with remainder, performing the Extended Euclidean Algorithm, naive multiplication and multiplication by Karatsuba's method. 
 
+One theoretical applicaton of the Extended Euclidean Algorithm, which in turn makes use of the previous methods, is to determine the multiplicative inverse of an element in $Z/nZ.$ A practical application of this is used in the RSA system, which is one of the first public-key cryptosystems. 
 
-\section{Limitations}
+Taking into account that numbers as long as $100 000$ are supported by the program's operations, one could easily see why the RSA is so efficient and safe - when prime numbers get big, the time it takes to finish the computation also increases. It would take a super computer decades to finish such an operation. 
 
-% Base > 32-bit?
+For reference, operations performed on numbers longer than $10 000$ digits take around 2 seconds for simple cases, as much as 20-30 seconds for numbers with digits between $50 000$ and $100 000$. The operations are consistently correct for a base up to 16. Keeping in mind that the longest alphabet currently contains 74 letters (the Cambodian one), the base can be at most 74, since it would be virtually impossible to represent the result of an operation. As far as our program is concerned, the base can be at most 36, since there are 10 digits and 26 letters. 
+
+Regarding the number of elementary opeartions, in the naive multiplication method, there are $ 3 \cdot m \cdot n$ multiplications, while in Karatsuba's method, there are $ 3^{2} (\frac{m}{2} \cdot \frac{n}{2}), $ where $m$ and $n$ are the number of digits each number has. This is an improvement by a factor of $\frac{3}{4}$ compared to doing four multiplications instead of three.
 
 
 \section{Contributions}
@@ -267,10 +290,6 @@ Alex and Maarten worked on EEA, Division, Program Controller, Formatter and the 
 Adrian worked on Multiplication and Division.
 Tim had to implement addition and subtraction and had a look at Karatsuba.
 Anastasiia took care of the report, with the help of Maarten and Adrian.  
-
-
-
-
 
 \begin{thebibliography}{9}
 
