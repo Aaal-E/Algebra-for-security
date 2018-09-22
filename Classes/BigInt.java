@@ -53,6 +53,9 @@ class BigInt {
         return !isPositive(n);
     }
 
+    static boolean isZero(List<Integer> n) {
+        return n.equals(ZERO);
+    }
 
     static void removeLeadingZeros(List<Integer> n) {
         while (n.size() > 2 && n.get(n.size() - 2) == 0) {
