@@ -91,7 +91,6 @@ Firstly, one should navigate in the command prompt to the folder where the jar f
 
 \includegraphics[width = 14 cm, height = 8 cm]{run1v1.PNG}
 
-Secondly, one should be aware that the input file already contains the row [answer], since that is the provided template. 
 
 By changing the input file according to the desired operations, the output file changes accordingly after executing the jar file again. 
 
@@ -101,10 +100,10 @@ To have intermediate values from algorithms printed in the console, run the comm
 
 \paragraph{Assumptions on input.txt}
 
-Not everything for input.txt was clear on our part.
-Test
+One should be aware that the input file should already contain the row [answer], since that is in the provided example template.
+The value of [answer] can be empty.
+In the output file the computed answer will be appended after [answer].
 
-% TODO: add info about expected formatting of input.txt file (i.e. with [answer])
 
 
 \paragraph{From source}
@@ -124,7 +123,7 @@ To build and run from the source java files, in the directory above the Classes 
 \subsection{Test cases}
 
 We have a number of test cases in the test folder which are written using JUnit.
-These also includes tests for boundary cases like $0+0$ and $1/1$, and all different combinations of signs.
+These also include tests for boundary cases like $0+0$ and $1/1$, and all different combinations of signs.
 Also the examples given in \texttt{example.txt} are included as test cases.
 When running the tests, almost all tests succeed, however two tests which are derived from \texttt{example.txt} gave a wrong answer.
 The extended Euclidian algorithm example with $x=5896363941d32eccd5c$ and $y=c7eb8a91fbad0d1c1f03$ gave a different answer from our algorithm than
@@ -133,7 +132,7 @@ After comparing with other calculators it appeared that the answer provided in t
 
 
 \paragraph{Example input file}
-
+See \texttt{input.txt}.
 
 
 \section{Code layout}
