@@ -2,6 +2,8 @@ import java.util.*;
 
 class Divider {
 
+    private static final Logger LOG = new Logger("divider");
+
     private List<Integer> q;
     private List<Integer> r;
     private int countAdd;
@@ -32,80 +34,6 @@ class Divider {
 
         // Division of nonnegative integers
         divisionNonnegative(aAbs, bAbs, radix);
-
-        /*
-
-
-        // Split number and sign
-        // xUnsigned/yUnsigned is the original number with the sign element removed
-        // At index 0 is the least significant word
-        List<Integer> aUnsigned = new ArrayList<>(a);
-        List<Integer> bUnsigned = new ArrayList<>(b);
-
-        // If x < y, we have quotient = 0 and remainder = x
-        if (lessThanUnsigned(a, b)) {
-            r = a;
-            // Return positive 0
-            return Arrays.asList(0, 0);
-        }
-
-        int k = aUnsigned.size();
-        int l = bUnsigned.size();
-
-        // The quotient will have at most m digits in current base
-        int m = k - l + 1;
-
-        // Initialize quotient to an array of length m
-        List<Integer> q = new ArrayList<>(m);
-        // Fill with zeroes
-        q.addAll(Collections.nCopies(m, 0));
-
-        // Fill remainder with a and add leading zero
-        r = new ArrayList<>(aUnsigned);
-        r.add(0);
-
-        for (int i = k - l; i >= 0; i--) {
-
-            int lhs = r.get(i + l) * base + r.get(i + l - 1);
-            int rhs = b.get(l - 1);
-            q.set(i, lhs / rhs);
-
-            if (q.get(i) >= base) {
-                // Overflow
-                q.set(i, base - 1);
-            }
-
-            int carry = 0;
-
-            for (int j = 0; j <= l - 1; j++) {
-                int tmp = r.get(i + j) - q.get(i) * b.get(j) + carry;
-
-                // Qoutient
-                carry = tmp / base;
-                // Remainder
-                r.set(i + j, tmp % base);
-            }
-            r.set(i + l, r.get(i + l) + carry);
-
-            while (r.get(i + l) < 0) {
-                carry = 0;
-                for (int j = 0; j <= l - 1; j++) {
-                    int tmp = r.get(i + j) + b.get(i) + carry;
-
-                    // Quotient
-                    carry = tmp / base;
-                    // Remainder
-                    r.set(i + j, tmp % base);
-                }
-                r.set(i + l, r.get(i + l) + carry);
-                q.set(i, q.get(i) - 1);
-            }
-        }
-
-        q = q.subList(0, k - l + 1);
-        r = r.subList(0, l);
-
-        */
 
         // Fix sign of quotient
         if (BigInt.isPositive(a) != BigInt.isPositive(b)) {
@@ -138,6 +66,10 @@ class Divider {
      * Does division on nonnegative integers. Modifies the input integers.
      */
     private void divisionNonnegative(List<Integer> x, List<Integer> y, int b) {
+
+        LOG.infof("divisionNonnegative(x = %s, y = %s, b = %s)", x, y, b);
+
+
         // Checks to be sure of the assumptions
         if (BigInt.isNegative(x) || BigInt.isNegative(y)) {
             throw new IllegalArgumentException("negative integer");
@@ -171,6 +103,8 @@ class Divider {
             List<Integer> toReduce = multiplier.mul(qi, biy, b);
             r = adder.sub(r, toReduce, b);
 
+            LOG.finerf("q_i = %s, r = %s", qi, r);
+
             int adjustments = 0;
 
             // Adjust q_i and r if r <= 0
@@ -178,16 +112,21 @@ class Divider {
                 r = adder.add(r, biy, b);
                 qi = adder.sub(qi, BigInt.ONE, b);
                 adjustments++;
+
+                LOG.finerf("after adjustment q_i = %s, r = %s", qi, r);
             }
 
-            // Adjust q and r if r > y
-            while (BigInt.greaterThan(r, y)) {
+            // Adjust q and r if r is greater than the denominator (b^i * y)
+            while (BigInt.greaterThan(r, biy)) {
                 r = adder.sub(r, biy, b);
                 qi = adder.add(qi, BigInt.ONE, b);
                 adjustments++;
+
+                LOG.finerf("after adjustment q_i = %s, r = %s", qi, r);
             }
 
-            System.out.printf("[divide] adjustments of the q approximation: %s\n", adjustments);
+
+            LOG.finef("adjustments of the q_i approximation: %s", adjustments);
 
             // Check if qi has only one word
             if (qi.size() > 2) {
@@ -196,6 +135,8 @@ class Divider {
 
             // Store qi in q
             q.set(i, qi.get(0));
+
+            LOG.finef("q = %s, r = %s", q, r);
         }
 
         // Remove leading zeros
@@ -207,6 +148,7 @@ class Divider {
      * Also assumes nonnegative integers and y != 0.
      */
     private List<Integer> approximateDivision(List<Integer> x, List<Integer> y, int b) {
+
         // Copy big integers since we will modify them
         x = new ArrayList<>(x);
         y = new ArrayList<>(y);
@@ -239,6 +181,8 @@ class Divider {
         // Do elementary floor division
         int result = leadingNumerator / leadingDenominator;
         countMul += 1;
+
+        LOG.finef("approximateDivision(x = %s, y = %s, b = %s) = %s", x, y, b, result);
 
         return Formatter.toBigInt(result, b);
     }

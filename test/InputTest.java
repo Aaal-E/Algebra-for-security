@@ -125,7 +125,7 @@ public class InputTest {
     }
 
     @Test
-    public void k() {
+    public void kMultiply() {
         radix = 16;
         x = bigint("-eed50d6aa53e51691add");
         y = bigint("-f9027b863f654daae6a8");
@@ -194,8 +194,8 @@ public class InputTest {
         assertEquals("-42bb80ba0313b9aff19", str(b));
     }
 
-    //@Test
-    public void r() {
+    @Test
+    public void rInvert() {
         radix = 16;
         x = bigint("5896363941d32eccd5c");
         m = bigint("c7eb8a91fbad0d1c1f03");
@@ -204,7 +204,7 @@ public class InputTest {
     }
 
     @Test
-    public void s() {
+    public void sInvert() {
         radix = 16;
         x = bigint("b99ab2815ee4b4a5f842");
         m = bigint("c7eb8a91fbad0d1c1f03");
