@@ -175,7 +175,7 @@ public class ProgramController {
     }
 
     public static void main(String[] args) throws IOException {
-        if (args.length >= 2) {
+        if (args.length >= 1) {
             Logger.setLevel(9);
         }
         new ProgramController().run();
