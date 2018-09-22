@@ -174,7 +174,6 @@ We firstly copy the numbers in auxiliary arrays. Then, since the way we store an
 
 Then we perform the naive multiplication algorithm \cite{shoup} by taking into account the carry and storing in a new array. While doing so, we count the number of elementary additions and multiplications. Afterwards, we add the bit sign at the end of the result according to these observations. Firstly, if both numbers were negative or positive, the result is positive. Secondly, if only one of the numbers is negative, then the result is positive. 
 
-\subsection{Multiplication by the method of Karatsuba}
 
 \subsection{Division}
 
@@ -214,28 +213,13 @@ In these cases the answer is trivially $q=0$ and $r=x$.
 Therefore before running the algorithm we check for this special case and return appropriately.
 
 
-\subsection{Euclid’s Extended Algorithm}
-
-
-\section{Modular arithmetic}
-
-\subsection{Modular reduction}
-
-\subsection{Addition, subtraction}
-
-\subsection{Multiplication}
-
-\cite{shoup}.
-
-\subsection{Modular inversion for a large modulus m}
-
 \section{Discussion and Limitations}
 
 % Present some examples of different word sizes and radices, and compare elementary operation counts of primary school and Karatsuba methods. Draw a conclusion based on the theory.
 
 The program offers the possibility to do operations such as addition, subtraction, division with remainder, performing the Extended Euclidean Algorithm, naive multiplication and multiplication by Karatsuba's method. 
 
-One theoretical applicaton of the Extended Euclidean Algorithm, which in turn makes use of the previous methods, is to determine the multiplicative inverse of an element in $Z/nZ.$ A practical application of this is used in the RSA system, which is one of the first public-key cryptosystems. 
+One theoretical applicaton of the Extended Euclidean Algorithm, which in turn makes use of the previous methods, is to determine the multiplicative inverse of an element in $Z/nZ.$ A practical application of this is used in the RSA system, which is one of the first public-key cryptosystems \cite{someone}. 
 
 Taking into account that numbers as long as $100 000$ are supported by the program's operations, one could easily see why the RSA is so efficient and safe - when prime numbers get big, the time it takes to finish the computation also increases. It would take a super computer decades to finish such an operation. 
 
@@ -264,6 +248,8 @@ Anastasiia took care of the report, with the help of Maarten and Adrian.
 \bibitem{shoup}
 Shoup, Victor. A computational introduction to number theory and algebra. Cambridge university press, 2009.
 
+\bibitem{someone}
+Bultheel, Adhemar, and Marc Van Barel. "Some applications of the Euclidean algorithm." Proceedings of the Second International Colloquium on Numerical Analysis. VSP Inl. Sci. Publ., 1994.
 
 
 \end{thebibliography}
