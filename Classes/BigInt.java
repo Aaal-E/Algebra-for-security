@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,5 +62,15 @@ class BigInt {
         while (n.size() > 2 && n.get(n.size() - 2) == 0) {
             n.remove(n.size() - 2);
         }
+    }
+
+    /**
+     * Changes the sign of the integer, i.e. does n*-1.
+     */
+    static List<Integer> swapSign(List<Integer> n) {
+        List<Integer> result = new ArrayList<>(n);
+        int newSign = 1 - n.get(n.size() - 1);
+        result.set(result.size() - 1, newSign);
+        return result;
     }
 }

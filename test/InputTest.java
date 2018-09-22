@@ -191,8 +191,8 @@ public class InputTest {
         b = euclid.getY();
         System.out.printf("d=%s, a=%s, b=%s\n", str(d), str(a), str(b));
         assertEquals("1", str(d));
-        assertEquals("96998fcd4268440ce6a5", str(a));
-        assertEquals("-42bb80ba0313b9aff19", str(b));
+        assertEquals("96998fcd4268440ce6a5", str(a)); // 15DAB57F3EBF751CE43
+        assertEquals("-42bb80ba0313b9aff19", str(b)); // -3151FAC4B944C90F385E
     }
 
     @Test

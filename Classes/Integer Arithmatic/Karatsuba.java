@@ -5,6 +5,9 @@ import java.util.*;
  */
 class Karatsuba {
 
+    private int countadd;
+    private int countmul;
+
     // Primary school multiplier is used for the base cases.
     private Multiplier multiplier = new Multiplier();
 
@@ -33,6 +36,10 @@ class Karatsuba {
         if (result.equals(Arrays.asList(0, 1))) {
             result = BigInt.ZERO;
         }
+
+        // Elementary counts are derived for following the derivation from the lecture
+        countadd = 6 * (x.size() - 1) * (y.size() - 1);
+        countmul = 9 * (x.size() - 1) / 2 * (y.size() - 1)  / 2;
 
         // Return
         return result;
@@ -160,5 +167,13 @@ class Karatsuba {
         result.add(integer.get(integer.size() - 1));
 
         return result;
+    }
+
+    int getCountAdd() {
+        return countadd;
+    }
+
+    int getCountMul() {
+        return countmul;
     }
 }

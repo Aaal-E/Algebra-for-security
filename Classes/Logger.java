@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 class Logger {
@@ -7,7 +6,7 @@ class Logger {
     /**
      * Set log level here.
      */
-    private final static int LEVEL = 9; // 0 (nothing) <= LEVEL <= 9 (everything)
+    private static int level = 0; // 0 (nothing) <= LEVEL <= 9 (everything)
 
     /**
      * Ignore certain loggers.
@@ -21,17 +20,17 @@ class Logger {
     }
 
     void infof(String msg, Object... args) {
-        if (LEVEL < 5) return;
+        if (level < 5) return;
         writef(msg, args);
     }
 
     void finef(String msg, Object... args) {
-        if (LEVEL < 6) return;
+        if (level < 6) return;
         writef(msg, args);
     }
 
     void finerf(String msg, Object... args) {
-        if (LEVEL < 7) return;
+        if (level < 7) return;
         writef(msg, args);
     }
 
@@ -65,5 +64,9 @@ class Logger {
             }
         }
         return true;
+    }
+
+    static void setLevel(int level) {
+        Logger.level = level;
     }
 }

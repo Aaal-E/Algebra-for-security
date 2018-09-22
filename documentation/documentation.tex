@@ -2,6 +2,8 @@
 
 \usepackage{hyperref}
 
+%TODO: add student names
+
 \title{Assignment 2WF90, Integer Arithmetic, September 2018}
 \author{
     Tim With A Lastname\\
@@ -62,12 +64,22 @@ We provide a compiled jar file which should be runnable from the command prompt.
 It should be run in the same folder as where \texttt{input.txt} is located.
 It writes the result to \texttt{output.txt}.
 
-The command is: \texttt{java -jar reinventingthewheel1.jar}
+% TODO: change jar name
+The command is: \texttt{java -jar group35.jar}.
+To have intermediate values from algorithms printed in the console, run the command with:
+\texttt{java -jar group35.jar verbose}.
+
+\paragraph{Assumptions on input.txt}
+
+Not everything for input.txt was clear on our part.
+Test
+
+% TODO: add info about expected formatting of input.txt file (i.e. with [answer])
 
 
 \paragraph{From source}
 
-To build and run from the source java files, in the top directory run:
+To build and run from the source java files, in the directory above the Classes folder, run:
 
 \begin{itemize}
 \item \texttt{javac -cp "Classes/:Classes/Integer Arithmatic/:Classes/Modular Arithmetic/" Classes/ProgramController.java}
@@ -76,9 +88,81 @@ To build and run from the source java files, in the top directory run:
 
 
 
+\subsection{Run example}
 
 
-\subsection{Run examples}
+\subsection{Test cases}
+
+We have a number of test cases in the test folder which are written using JUnit.
+These also includes tests for boundary cases like $0+0$ and $1/1$, and all different combinations of signs.
+Also the examples given in \texttt{example.txt} are included as test cases.
+When running the tests, almost all tests succeed, however two tests which are derived from \texttt{example.txt} gave a wrong answer.
+The extended Euclidian algorithm example with $x=5896363941d32eccd5c$ and $y=c7eb8a91fbad0d1c1f03$ gave a different answer from our algorithm than
+the answer provided in the example file.
+After comparing with other calculators it appeared that the answer provided in the example file was wrong.
+
+
+\paragraph{Example input file}
+
+\begin{verbatim}
+[radix] 8
+[add]
+[x] 3
+[y] -7
+[answer] ..
+
+[radix] 10
+[subtract]
+[x] 5
+[y] 6
+[answer] ..
+
+[radix] 10
+[multiply]
+[x] -2
+[y] 100
+[answer]
+
+[radix] 16
+[karatsuba]
+[x] ff
+[y] 2
+[answer]
+[count-add]
+[count-mul]
+
+[radix] 2
+[reduce]
+[x] 11
+[m] 10
+[answer]
+
+[radix] 10
+[inverse]
+[x] 5
+[m] 6
+[answer]
+
+[radix] 10
+[euclid]
+[x] 95
+[y] 90
+[answ-d]
+[answ-a]
+[answ-b]
+
+[radix] 36
+[add]
+[x] y
+[y] x
+[m] 10
+[answer] #v?
+
+[radix] 10
+sdfsdf
+
+\end{verbatim}
+
 
 
 \section{Code layout}
@@ -180,11 +264,8 @@ Therefore before running the algorithm we check for this special case and return
 \section{Contributions}
 
 Alex and Maarten worked on EEA, Division, Program Controller, Formatter and the rest of the auxiliary classes.
-
 Adrian worked on Multiplication and Division.
-
 Tim had to implement addition and subtraction and had a look at Karatsuba.
-
 Anastasiia took care of the report, with the help of Maarten and Adrian.  
 
 

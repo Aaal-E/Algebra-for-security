@@ -21,6 +21,7 @@ public class ProgramController {
     Modulator modulator = new Modulator();
     Inverser inverser = new Inverser();
     Euclid euclid = new Euclid();
+    Karatsuba karatsuba = new Karatsuba();
 
     private void run() throws IOException {
         Reader reader = new FileReader("input.txt");
@@ -46,7 +47,6 @@ public class ProgramController {
         switch (cmd.command) {
             case "radix":
                 radix = Integer.parseInt(cmd.argument);
-                System.out.printf("radix: %s\n", radix);
 
                 // Assume the start of a new computation, clear variables
                 clearFields();
@@ -63,22 +63,18 @@ public class ProgramController {
                 clearFields();
 
                 commandtype = cmd.command;
-                System.out.printf("commandtype: %s\n", commandtype);
                 break;
 
             case "x":
                 x = Formatter.toBigInt(cmd.argument, radix);
-                System.out.printf("x: %s\n", x);
                 break;
 
             case "y":
                 y = Formatter.toBigInt(cmd.argument, radix);
-                System.out.printf("y: %s\n", y);
                 break;
 
             case "m":
                 m = Formatter.toBigInt(cmd.argument, radix);
-                System.out.printf("m: %s\n", m);
                 break;
 
 
@@ -112,6 +108,12 @@ public class ProgramController {
                         }
                         break;
 
+                    case "karatsuba":
+                        io.print(karatsuba.karatsuba(x, y, radix), radix);
+                        countadd = karatsuba.getCountAdd();
+                        countmul = karatsuba.getCountMul();
+                        break;
+
                     case "reduce":
                         io.print(modulator.mod(x, m, radix), radix);
                         break;
@@ -136,10 +138,14 @@ public class ProgramController {
                 break;
 
             case "answ-a":
+                // It assumes that the command answ-d has been called before
+                // (i.e. [answ-d] should be above [answ-b]/[answ-a] in input.txt
                 io.print(a, radix);
                 break;
 
             case "answ-b":
+                // It assumes that the command answ-d has been called before
+                // (i.e. [answ-d] should be above [answ-b]/[answ-a] in input.txt
                 io.print(b, radix);
                 break;
 
@@ -169,6 +175,9 @@ public class ProgramController {
     }
 
     public static void main(String[] args) throws IOException {
+        if (args.length >= 2) {
+            Logger.setLevel(9);
+        }
         new ProgramController().run();
     }
 }

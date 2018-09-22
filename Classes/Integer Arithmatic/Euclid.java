@@ -62,9 +62,13 @@ class Euclid {
         x = x1;
         y = y1;
 
-        // Copy the sign of original numbers
-        x.set(x.size() - 1, a.get(a.size() - 1));
-        y.set(y.size() - 1, b.get(b.size() - 1));
+        // Switch the sign is result is negative
+        if (BigInt.isNegative(a)) {
+            x = BigInt.swapSign(x);
+        }
+        if (BigInt.isNegative(b)) {
+            y = BigInt.swapSign(y);
+        }
 
         LOG.infof("d = %s, x = %s, y = %s", d, x, y);
 
