@@ -7,6 +7,7 @@ import java.util.List;
 class BigInt {
 
     final static List<Integer> ZERO = Arrays.asList(0, 0);
+    final static List<Integer> ONE = Arrays.asList(1, 0);
 
     /**
      * Compares two big integers. Assumes they have the same radix.
@@ -34,6 +35,10 @@ class BigInt {
 
     static boolean lessThan(List<Integer> a, List<Integer> b) {
         return compare(a, b) < 0;
+    }
+
+    static boolean greaterThan(List<Integer> a, List<Integer> b) {
+        return compare(a, b) > 0;
     }
 
     static boolean greaterOrEqual(List<Integer> a, List<Integer> b) {

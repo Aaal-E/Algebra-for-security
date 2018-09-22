@@ -1,18 +1,16 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Conversion between string and big integer.
  */
-public class Formatter {
+class Formatter {
 
     /**
      * Returns a string representation using given radix.
      */
-    public static String toString(List<Integer> n, int radix) {
-        // Remove leading zeros to be sure
-        BigInt.removeLeadingZeros(n);
-
+    static String toString(List<Integer> n, int radix) {
         StringBuilder result = new StringBuilder();
         if (BigInt.isNegative(n)) {
             result.append('-');
@@ -28,7 +26,7 @@ public class Formatter {
     /**
      * Creates a big integer from a string.
      */
-    public static List<Integer> toBigInt(String number, int radix) {
+    static List<Integer> toBigInt(String number, int radix) {
         List<Integer> n = new ArrayList<>();
 
         // Check sign
@@ -45,9 +43,34 @@ public class Formatter {
         // Add sign
         n.add(neg);
 
-        // Remove leading zeros to be sure
-        BigInt.removeLeadingZeros(n);
-
         return n;
+    }
+
+    /**
+     * Creates a big integer from a 32-bit integer.
+     */
+    static List<Integer> toBigInt(int n, int radix) {
+        List<Integer> result = new ArrayList<>();
+
+        if (n == 0) {
+            return Arrays.asList(0, 0);
+        }
+
+        // Determine sign and make n positive
+        int sign = 0;
+        if (n < 0) {
+            sign = 1;
+            n *= -1;
+        }
+
+        // Reduce n and fill words
+        while (n != 0) {
+            result.add(n % radix);
+            n = n / radix;
+        }
+
+        // Add sign
+        result.add(sign);
+        return result;
     }
 }

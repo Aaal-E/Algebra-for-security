@@ -63,6 +63,8 @@ class Multiplier {
         countadd = m + m * (n * 7) + 6;  //first for + second for (==) + if -Is this correct?
         countmul = m * n * 3;        // is this correct?
 
+        // Remove leading zeros
+        BigInt.removeLeadingZeros(z);
 
         return z; // [z]_b in the usual form sum_{0}^{k} ( z_i* b^{i)
 
@@ -80,7 +82,10 @@ class Multiplier {
     List<Integer> mul(List<Integer> x, List<Integer> y, List<Integer> m, int b) {
         x = mod.mod(x, m, b);
         y = mod.mod(y, m, b);
-        return mod.mod(mul(x, y, b), m, b);
+        List<Integer> ans = mod.mod(mul(x, y, b), m, b);
+
+        BigInt.removeLeadingZeros(ans);
+        return ans;
     }
 }
 

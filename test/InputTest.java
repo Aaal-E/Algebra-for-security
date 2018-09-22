@@ -182,7 +182,7 @@ public class InputTest {
     }
 
     @Test
-    public void q() {
+    public void qEuclid() {
         radix = 16;
         x = bigint("5896363941d32eccd5c");
         y = bigint("c7eb8a91fbad0d1c1f03");
