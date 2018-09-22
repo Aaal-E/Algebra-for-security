@@ -33,7 +33,7 @@ class Multiplier {
         y.add(0);
 
         z.clear();
-//        for (int i = n; i < m + n - 1; i++)
+
         for (int i = 0; i < m + n; i++)
             z.add(0); //reset the resulting array z = xy.
 
@@ -60,8 +60,8 @@ class Multiplier {
         else
             z.add(0);    //if both pos or negative, the result is positive.
 
-        countadd = m + m * (n * 7) + 6;  //first for + second for (==) + if -Is this correct?
-        countmul = m * n * 3;        // is this correct?
+        countadd = m + m * (n * 7) + 6;  
+        countmul = m * n * 3;      
 
         // Remove leading zeros
         BigInt.removeLeadingZeros(z);
